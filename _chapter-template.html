@@ -1,0 +1,204 @@
+<!--
+  ============================================================
+  SCIENCE PRO — CHAPTER PAGE TEMPLATE
+  ============================================================
+  This file is NOT a live page — nothing links to it, and it's
+  not registered in js/data.js. It exists purely so that every
+  new chapter starts from a correct, fully-wired copy instead of
+  being hand-built from scratch (and risking a missed CSP tag,
+  broken script include, etc).
+
+  HOW TO USE THIS FILE — step by step:
+
+  1. Duplicate this file and rename it, e.g. reflectionoflight.html
+     (lowercase, no spaces/hyphens, matching the site's existing
+     chapter filenames like soundwaves.html).
+
+  2. Search this file for every "REPLACE:" comment and fill in the
+     real content. There are placeholders for:
+       - <title> and meta description
+       - Breadcrumb (Class number, Subject name + link, Chapter title)
+       - Page hero eyebrow / heading / intro paragraph
+       - The chapter's own simulation area (completely custom —
+         see soundwaves.html for a full worked example using a
+         <canvas>, sliders, live readouts and concept cards)
+       - The data-chapter slug on the PYQs resource block (must
+         match the filename prefix of that chapter's PDF)
+       - The quiz questions in this chapter's own JS file
+
+  3. Do NOT touch, rename, or remove:
+       - The <meta http-equiv="Content-Security-Policy" ...> tag
+       - The class="reveal" pattern on content blocks
+       - The font <link> block, especially id="webfontsLink"
+         (see PERFORMANCE.md — this is what keeps fonts from
+         blocking the page render)
+       - The `defer` attribute on every <script> tag, and their
+         order (data.js, then main.js, then page-specific scripts)
+       - The <script> tags for data.js, main.js, chapter-resources.js
+
+  4. Write this chapter's own simulation logic in a new file,
+     e.g. js/reflectionoflight.js, and add its <script> tag at the
+     bottom (see the placeholder near the closing </body>).
+
+  5. Add the matching PDF at:
+       assets/downloads/<your-chapter-slug>-pyqs.pdf
+     (any filename prefix you choose, as long as it matches the
+     data-chapter attribute you set in step 2). If you skip this,
+     the page will correctly show "Not added yet" instead of a
+     broken link — that's expected, not a bug.
+
+  6. Register the chapter in js/data.js, under the right subject's
+     array in `topics`, with status: "live" and page: "yourfile.html"
+     — this is what makes it appear as a clickable card on
+     subject.html instead of "Coming soon".
+
+  That's the whole checklist. Everything else on this page — the
+  CSP, the scroll-reveal animation, the resource-download system,
+  the header/footer/branding — already works and doesn't need to
+  be touched per chapter.
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<!-- REPLACE: page title and meta description -->
+<title>Chapter Title — Class 10 Subject — Science Pro</title>
+<meta name="description" content="One or two sentences describing what a student will see and learn on this page." />
+<link rel="icon" href="assets/logo-transparent.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts never block first paint: preload warms the cache, the stylesheet
+     itself is tagged media="print" so the browser doesn't wait on it to
+     render, then js/main.js flips it to media="all" the instant it's
+     ready. See PERFORMANCE.md. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" media="print" id="webfontsLink" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  /* Page-specific styles for THIS chapter only go here.
+     Keep anything reusable (buttons, cards, layout primitives)
+     in css/style.css instead — this block is for the one-off
+     visual this chapter's simulation needs.
+     See soundwaves.html for a full worked example: a canvas-based
+     wave simulator with sliders, live numeric readouts, and a
+     4-card concept grid. */
+
+  /* REPLACE: your chapter's own CSS goes here */
+
+  @media (max-width: 720px){
+    /* REPLACE: mobile-specific overrides for your chapter's layout */
+  }
+</style>
+</head>
+<body>
+<header class="site-header is-dark">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="brand-logo" width="73" height="32" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="classes.html">Classes</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero" style="padding-bottom:80px;">
+  <div class="container">
+    <!-- REPLACE: breadcrumb — update class number, subject id/name, chapter title -->
+    <div class="crumb" style="color:rgba(250,247,241,.6); margin-bottom:14px;">
+      <a href="classes.html">Classes</a><span class="sep">/</span>
+      <a href="class10.html">Class 10</a><span class="sep">/</span>
+      <a href="subject.html?class=10&subject=physics">Physics</a><span class="sep">/</span>
+      <span>Chapter Title</span>
+    </div>
+    <!-- REPLACE: eyebrow, heading, intro paragraph -->
+    <span class="eyebrow">CHAPTER N · SUBJECT</span>
+    <h1>Chapter Title</h1>
+    <p>One or two sentences setting up what the student is about to explore and why it matters.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     REPLACE: your chapter's own simulation/visualization goes here.
+     Wrap it in a white card matching the site's style, e.g.:
+
+     <div class="container">
+       <div class="your-lab-class reveal">
+         ... canvas, sliders, controls, live readouts ...
+       </div>
+       <div class="concept-grid">
+         <div class="concept-card reveal"> ... </div>
+         <div class="concept-card reveal" style="transition-delay:0.08s;"> ... </div>
+         ... (concept-card, resource-card etc. are already styled
+             in css/style.css — reuse them rather than reinventing) ...
+       </div>
+     </div>
+
+     See soundwaves.html for the full working pattern.
+     ============================================================ -->
+
+<div class="container">
+  <!-- Your chapter content replaces this comment -->
+</div>
+
+<section class="section-tight" id="resourcesSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">RESOURCES</span>
+      <h2>Practice with past questions</h2>
+      <p>Previous year questions for this chapter — download and practice offline.</p>
+    </div>
+    <!-- REPLACE: data-chapter must match your PDF filename prefix,
+         e.g. assets/downloads/reflectionoflight-pyqs.pdf → data-chapter="reflectionoflight" -->
+    <div class="resource-grid" id="resourceGrid" data-chapter="yourchapterslug"></div>
+  </div>
+</section>
+
+<section class="section-tight" id="quizSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">PRACTICE</span>
+      <h2>Check your understanding</h2>
+      <p>A few quick questions on what you just explored.</p>
+    </div>
+    <!-- Your chapter's own JS renders questions into this shell,
+         following the same pattern as js/soundwaves.js's quiz code -->
+    <div class="game-shell reveal" id="quizShell" style="margin:0;"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="footer-logo" width="77" height="34" />
+        </div>
+        <div class="footer-slogan">learn science in a fun and easy way — don't memorise it.</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Science Pro. All rights reserved.</span>
+      <span>Built for curious students, classes 5–12.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/chapter-resources.js" defer></script>
+<!-- REPLACE: add this chapter's own script, e.g.: -->
+<!-- <script src="js/reflectionoflight.js" defer></script> -->
+</body>
+</html>

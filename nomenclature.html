@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Nomenclature of Organic Compounds — Class 10 Chemistry — Science Pro</title>
+<meta name="description" content="Build simple organic compound names yourself — methane to butanoic acid — and see exactly how the prefix and suffix combine, the way SSLC exam questions ask it." />
+<link rel="icon" href="assets/logo-transparent.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts never block first paint: preload warms the cache, the stylesheet
+     itself is tagged media="print" so the browser doesn't wait on it to
+     render, then js/main.js flips it to media="all" the instant it's
+     ready. See PERFORMANCE.md. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" media="print" id="webfontsLink" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="prefetch" href="subject.html?class=10&amp;subject=chemistry" />
+<style>
+  /* Page-specific styles for the Nomenclature chapter — the compound
+     builder widget. The card container, concept cards, and resource
+     card are shared (css/style.css: .lab-card, .concept-card,
+     .resource-card) so this stays lean. */
+
+  :root{ --c-chapter-accent: var(--c-chemistry); }
+
+  .builder-row{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom: 22px;
+  }
+  .builder-row .row-label{
+    font-family: var(--f-mono);
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color: var(--c-ink-soft);
+  }
+  .btn-row{ display:flex; gap:10px; flex-wrap:wrap; }
+  .nomen-btn{
+    font-family: var(--f-mono);
+    font-size:0.85rem;
+    padding: 10px 18px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid var(--c-cream-dim);
+    background:#fff;
+    color: var(--c-ink-soft);
+    transition: all 0.2s ease;
+  }
+  .nomen-btn:hover:not(:disabled){ border-color: var(--c-chemistry); color: var(--c-ink); }
+  .nomen-btn.active{
+    border-color: var(--c-chemistry);
+    background: rgba(156,204,60,0.14);
+    color: var(--c-ink);
+    font-weight:600;
+  }
+  .nomen-btn:disabled{ opacity:0.35; cursor:not-allowed; }
+
+  .name-display{
+    background: var(--c-navy);
+    border-radius: var(--radius-md);
+    padding: 30px 26px;
+    text-align:center;
+    margin-top: 6px;
+  }
+  .name-display .built-name{
+    font-family: var(--f-display);
+    font-weight:700;
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+    color:#fff;
+  }
+  .name-display .built-name .part-prefix{ color: var(--c-chemistry); }
+  .name-display .built-name .part-suffix{ color: var(--c-orange-light); }
+  .name-display .formulas{
+    margin-top:16px;
+    display:flex;
+    justify-content:center;
+    gap:28px;
+    flex-wrap:wrap;
+  }
+  .name-display .formula-block{ text-align:center; }
+  .name-display .formula-block strong{
+    display:block;
+    font-family: var(--f-mono);
+    font-size:1.05rem;
+    color:#fff;
+  }
+  .name-display .formula-block span{
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color: rgba(250,247,241,0.5);
+  }
+  .invalid-note{
+    margin-top:14px;
+    font-size:0.85rem;
+    color: var(--c-orange-deep);
+    text-align:center;
+    display:none;
+  }
+  .invalid-note.show{ display:block; }
+
+  @media (max-width: 480px){
+    .nomen-btn{ font-size:0.78rem; padding:9px 14px; }
+    .name-display .formulas{ gap:16px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header is-dark">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="brand-logo" width="73" height="32" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="classes.html">Classes</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero" style="padding-bottom:80px;">
+  <div class="container">
+    <div class="crumb" style="color:rgba(250,247,241,.6); margin-bottom:14px;">
+      <a href="classes.html">Classes</a><span class="sep">/</span>
+      <a href="class10.html">Class 10</a><span class="sep">/</span>
+      <a href="subject.html?class=10&subject=chemistry">Chemistry</a><span class="sep">/</span>
+      <span>Nomenclature of Organic Compounds</span>
+    </div>
+    <span class="eyebrow">CHAPTER 1 · CHEMISTRY</span>
+    <h1>Nomenclature of Organic Compounds</h1>
+    <p>Every organic compound's name is built from two parts: a prefix that tells you how many carbon atoms it has, and a suffix that tells you what kind of compound it is. Build a few yourself below and the pattern will click fast.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="lab-card reveal">
+
+    <div class="builder-row">
+      <span class="row-label">Step 1 — Number of carbon atoms</span>
+      <div class="btn-row" id="carbonRow">
+        <button class="nomen-btn" data-carbon="1">1 — Meth-</button>
+        <button class="nomen-btn" data-carbon="2">2 — Eth-</button>
+        <button class="nomen-btn" data-carbon="3">3 — Prop-</button>
+        <button class="nomen-btn" data-carbon="4">4 — But-</button>
+      </div>
+    </div>
+
+    <div class="builder-row">
+      <span class="row-label">Step 2 — Type of compound</span>
+      <div class="btn-row" id="typeRow">
+        <button class="nomen-btn" data-type="ane">Single bonds only (-ane)</button>
+        <button class="nomen-btn" data-type="ene">One double bond (-ene)</button>
+        <button class="nomen-btn" data-type="yne">One triple bond (-yne)</button>
+        <button class="nomen-btn" data-type="ol">Alcohol, −OH (-ol)</button>
+        <button class="nomen-btn" data-type="acid">Carboxylic acid, −COOH (-oic acid)</button>
+      </div>
+    </div>
+
+    <div class="name-display">
+      <div class="built-name" id="builtName">Pick a carbon count to begin</div>
+      <div class="formulas">
+        <div class="formula-block">
+          <strong id="structuralFormula">—</strong>
+          <span>Structural formula</span>
+        </div>
+        <div class="formula-block">
+          <strong id="molecularFormula">—</strong>
+          <span>Molecular formula</span>
+        </div>
+      </div>
+      <div class="invalid-note" id="invalidNote">A single carbon atom can't have a double or triple bond — try 2 or more.</div>
+    </div>
+  </div>
+
+  <div class="concept-grid">
+    <div class="concept-card reveal">
+      <h4>Carbon-count prefixes</h4>
+      <p>The first part of the name always tells you how many carbon atoms are in the chain.</p>
+      <span class="formula">Meth-1 · Eth-2 · Prop-3 · But-4</span>
+    </div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;">
+      <h4>Bond-type suffixes</h4>
+      <p>These endings describe the bonds between carbon atoms in a plain hydrocarbon chain.</p>
+      <span class="formula">-ane single · -ene double · -yne triple</span>
+    </div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;">
+      <h4>Functional group suffixes</h4>
+      <p>These endings replace the hydrocarbon suffix entirely when a functional group is present.</p>
+      <span class="formula">-ol alcohol (−OH) · -oic acid (−COOH)</span>
+    </div>
+    <div class="concept-card reveal" style="transition-delay:0.24s;">
+      <h4>The naming rule</h4>
+      <p>Every simple organic name you'll be asked for at this level follows the same pattern.</p>
+      <span class="formula">Name = Prefix + Suffix</span>
+    </div>
+  </div>
+</div>
+
+<section class="section-tight" id="resourcesSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">RESOURCES</span>
+      <h2>Practice with past questions</h2>
+      <p>Previous year questions for this chapter — download and practice offline.</p>
+    </div>
+    <div class="resource-grid" id="resourceGrid" data-chapter="nomenclature"></div>
+  </div>
+</section>
+
+<section class="section-tight" id="quizSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">PRACTICE</span>
+      <h2>Check your understanding</h2>
+      <p>The kind of naming questions that actually come up in the exam.</p>
+    </div>
+    <div class="game-shell reveal" id="quizShell" style="margin:0;"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="footer-logo" width="77" height="34" />
+        </div>
+        <div class="footer-slogan">learn science in a fun and easy way — don't memorise it.</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Science Pro. All rights reserved.</span>
+      <span>Built for curious students, classes 5–12.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/chapter-resources.js" defer></script>
+<script src="js/nomenclature.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+# Security headers for static hosts that read a _headers file
+# (Netlify, Cloudflare Pages both support this format natively).
+#
+# The <meta http-equiv="Content-Security-Policy"> tag already in every
+# HTML page covers CSP for any host. The headers below CANNOT be set
+# via a <meta> tag — they only work as real HTTP response headers —
+# so this file (or the Apache/Nginx equivalents in SECURITY.md) is
+# what actually turns them on once the site is deployed.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none';
+
+# ---------------------------------------------------------------
+# Caching. HTML is deliberately NOT cached long-term — new chapters
+# get registered in js/data.js and existing pages get edited often
+# during active development, so every HTML request always
+# revalidates with the server rather than risk a visitor being
+# stuck on a stale page.
+#
+# CSS/JS get a short cache (1 hour) since they're also edited
+# during development but change less often per-visit than HTML.
+#
+# Images and PDFs get a longer cache (1 week) since they're the
+# least likely to be silently overwritten under the same filename.
+# If you DO replace an image or PDF and need visitors to see the
+# new version immediately, rename the file (e.g. add "-v2") rather
+# than relying on a hard refresh.
+# ---------------------------------------------------------------
+
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/css/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/js/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/assets/*
+  Cache-Control: public, max-age=604800
