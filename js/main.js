@@ -1,6 +1,6 @@
 /* =========================================================
    SCIENCE PRO — Shared behaviour
-   Runs on every page: header scroll shadow, mobile nav toggle,
+   Runs on every page: header scroll shadow,
    the scroll-reveal animation for .reveal elements, and the
    non-blocking font swap.
    ========================================================= */
@@ -21,8 +21,7 @@ if (webfontsLink) webfontsLink.media = "all";
 
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector(".site-header");
-  const toggle = document.querySelector(".nav-toggle");
-  const navLinks = document.querySelector(".nav-links");
+
 
   if (header) {
     const onScroll = () => {
@@ -32,19 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
-  if (toggle && navLinks) {
-    toggle.addEventListener("click", () => {
-      navLinks.classList.toggle("open");
-      toggle.setAttribute(
-        "aria-expanded",
-        navLinks.classList.contains("open") ? "true" : "false"
-      );
-    });
-    // Close menu when a link is tapped (mobile)
-    navLinks.querySelectorAll("a").forEach((a) =>
-      a.addEventListener("click", () => navLinks.classList.remove("open"))
-    );
-  }
+
 
   initScrollReveal();
 });

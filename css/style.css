@@ -185,7 +185,7 @@ p{ margin:0; }
 .nav-links a{ opacity:0.85; transition: opacity .2s ease; }
 .nav-links a:hover{ opacity:1; }
 .nav-cta{ display:flex; align-items:center; gap:16px; }
-.nav-toggle{ display:none; }
+
 
 /* =========================================================
    HERO (index.html)
@@ -649,27 +649,35 @@ p{ margin:0; }
 }
 
 @media (max-width: 720px){
-  .nav-links{
-    position:fixed; inset: 0 0 0 auto;
-    width: min(78vw, 320px);
-    background: var(--c-navy-deep);
-    flex-direction:column;
-    align-items:flex-start;
-    padding: 100px 30px 30px;
-    gap: 26px;
-    transform: translateX(100%);
-    transition: transform .3s ease;
-    z-index:60;
-  }
-  .nav-links.open{ transform: translateX(0); }
-  .nav-toggle{
-    display:flex; flex-direction:column; gap:5px;
-    width:34px; height:24px; justify-content:center;
-    background:none; border:none;
-  }
-  .nav-toggle span{ height:2px; background:currentColor; border-radius:2px; }
-  .nav-cta .btn-ghost{ display:none; }
 
+.nav-links{
+  position:static;
+  width:auto;
+  background:transparent;
+  flex-direction:row;
+  align-items:center;
+  padding:0;
+  gap:0;
+  transform:none;
+  transition:none;
+}
+
+/* Keep mobile header clean — show only the final navigation link */
+.nav-links a{
+  display:none;
+}
+
+.nav-links a:last-child{
+  display:block;
+  opacity:1;
+  font-size:0.9rem;
+  font-weight:600;
+}
+
+/* Desktop CTA isn't needed on small screens */
+.nav-cta{
+  display:none;
+}
   .class-grid{ grid-template-columns: repeat(2, 1fr); }
   .subject-grid{ grid-template-columns: 1fr; }
   .game-grid{ grid-template-columns: 1fr; }
