@@ -98,7 +98,16 @@ const SITE_DATA = {
         page: "nomenclature.html",
       },
     ],
-    maths: [],
+    maths: [
+      {
+        id: "statistics",
+        title: "Statistics",
+        tag: "Chapter 13",
+        desc: "See why the mean can mislead, then find the median from a table.",
+        status: "live",
+        page: "statistics.html",
+      },
+    ],
     biology: [
       {
         id: "genetics",
