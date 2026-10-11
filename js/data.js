@@ -66,6 +66,14 @@ const SITE_DATA = {
         page: "soundwaves.html",
       },
       {
+        id: "lenses",
+        title: "Lenses",
+        tag: "Chapter 2",
+        desc: "Drag a candle along the principal axis of a convex lens and see where the image forms.",
+        status: "live",
+        page: "lenses.html",
+      },
+      {
         id: "light-reflection",
         title: "Reflection of Light",
         tag: "Chapter 2",

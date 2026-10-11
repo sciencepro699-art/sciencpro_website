@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Lenses — Class 10 Physics — Science Pro</title>
+<meta name="description" content="Drag a candle along the principal axis of a convex lens and see where the image forms, and whether it is real or virtual." />
+<link rel="icon" href="assets/logo-transparent.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts never block first paint: preload warms the cache, the stylesheet
+     itself is tagged media="print" so the browser doesn't wait on it to
+     render, then js/main.js flips it to media="all" the instant it's
+     ready. See PERFORMANCE.md. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" media="print" id="webfontsLink" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="prefetch" href="subject.html?class=10&amp;subject=physics" />
+<style>
+  /* Page-specific styles for the Lenses chapter. */
+  :root{ --c-chapter-accent: var(--c-physics); }
+
+  .lens-canvas-wrap{ background: var(--c-navy); border-radius: var(--radius-md); overflow:hidden; position:relative; }
+  #lensCanvas{ display:block; width:100%; height:320px; touch-action:none; }
+  .lens-caption{ position:absolute; bottom:10px; left:16px; font-family: var(--f-mono); font-size:0.68rem; color: rgba(250,247,241,0.45); }
+
+  .case-banner{
+    margin-top:18px; padding:14px 18px; border-radius: var(--radius-sm);
+    background: rgba(79,195,247,0.12); border-left:4px solid var(--c-physics);
+    font-weight:600; font-size:0.95rem; line-height:1.45;
+  }
+  .lens-controls{ margin-top:22px; }
+  .lens-controls label{ display:flex; justify-content:space-between; font-size:0.9rem; font-weight:600; margin-bottom:10px; }
+  .lens-controls label span{
+    font-family: var(--f-mono); font-weight:500; color: var(--c-physics);
+    background: rgba(79,195,247,0.12); padding:2px 9px; border-radius: var(--radius-pill); font-size:0.8rem;
+  }
+  input[type="range"]{ width:100%; accent-color: var(--c-physics); height:6px; }
+  .preset-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+  .preset-btn{
+    font-family: var(--f-mono); font-size:0.76rem; padding:8px 14px; border-radius: var(--radius-pill);
+    border:1.5px solid var(--c-cream-dim); background:#fff; color: var(--c-ink-soft); transition: all .2s ease;
+  }
+  .preset-btn:hover, .preset-btn.active{ border-color: var(--c-physics); color: var(--c-physics); background: rgba(79,195,247,0.08); }
+
+  .lens-readouts{ display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; margin-top:26px; }
+  .readout{ background: var(--c-cream-dim); border-radius: var(--radius-sm); padding:16px; text-align:center; }
+  .readout strong{ display:block; font-family: var(--f-display); font-size:1.2rem; color: var(--c-ink); }
+  .readout span{ font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; color: var(--c-ink-soft); }
+
+  .table-wrap{ overflow-x:auto; margin-top:26px; }
+  #caseTable{ width:100%; border-collapse:collapse; font-size:0.88rem; min-width:560px; }
+  #caseTable th, #caseTable td{ text-align:left; padding:10px 12px; border-bottom:1px solid var(--c-cream-dim); }
+  #caseTable th{ font-family: var(--f-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; color: var(--c-ink-soft); }
+  #caseTable tr.active td{ background: rgba(79,195,247,0.16); font-weight:600; }
+
+  .ray-key{ display:flex; gap:18px; flex-wrap:wrap; margin-top:14px; font-size:0.8rem; color: var(--c-ink-soft); }
+  .ray-key i{ display:inline-block; width:16px; height:3px; border-radius:2px; margin-right:6px; vertical-align:middle; }
+
+  @media (max-width: 720px){
+    .lens-readouts{ grid-template-columns: repeat(2, 1fr); }
+    #lensCanvas{ height:320px; }
+  }
+</style>
+</head>
+<body>
+<header class="site-header is-dark">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="brand-logo" width="73" height="32" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="classes.html">Classes</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero" style="padding-bottom:80px;">
+  <div class="container">
+    <div class="crumb" style="color:rgba(250,247,241,.6); margin-bottom:14px;">
+      <a href="classes.html">Classes</a><span class="sep">/</span>
+      <a href="class10.html">Class 10</a><span class="sep">/</span>
+      <a href="subject.html?class=10&subject=physics">Physics</a><span class="sep">/</span>
+      <span>Lenses</span>
+    </div>
+    <span class="eyebrow">CHAPTER 2 · PHYSICS</span>
+    <h1>Lenses</h1>
+    <p>Drag the candle along the principal axis of a convex lens. Watch where the image forms, how big it is, and whether it is real or virtual.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="lab-card reveal">
+
+    <div class="lens-canvas-wrap">
+      <canvas id="lensCanvas" aria-label="Convex lens simulation. Drag the candle left or right."></canvas>
+      <span class="lens-caption">F = principal focus · 2F = twice the focal length · O = optic centre · f = 10 cm</span>
+    </div>
+
+    <div class="ray-key">
+      <span><i style="background:#FFB03A"></i>Parallel ray → through F</span>
+      <span><i style="background:#FF7A29"></i>Ray through O → straight</span>
+      <span><i style="background:#F472B6"></i>Ray through F → parallel</span>
+    </div>
+
+    <div class="case-banner" id="caseBanner" aria-live="polite"></div>
+
+    <div class="lens-controls">
+      <label for="objectDistSlider">Object distance from lens <span id="distLabel">30 cm</span></label>
+      <input type="range" id="objectDistSlider" min="2.5" max="32" step="0.1" value="30" />
+      <div class="preset-row">
+        <button class="preset-btn lens-preset" data-dist="30">Beyond 2F</button>
+        <button class="preset-btn lens-preset" data-dist="20">At 2F</button>
+        <button class="preset-btn lens-preset" data-dist="15">Between F and 2F</button>
+        <button class="preset-btn lens-preset" data-dist="10">At F</button>
+        <button class="preset-btn lens-preset" data-dist="6">Between F and lens</button>
+      </div>
+    </div>
+
+    <div class="lens-readouts">
+      <div class="readout"><strong id="readU">−30 cm</strong><span>Object distance (u)</span></div>
+      <div class="readout"><strong id="readV">+15 cm</strong><span>Image distance (v)</span></div>
+      <div class="readout"><strong id="readM">−0.50</strong><span>Magnification (m)</span></div>
+      <div class="readout"><strong id="readNature">Real</strong><span>Nature</span></div>
+      <div class="readout"><strong id="readOrientation">Inverted</strong><span>Orientation</span></div>
+      <div class="readout"><strong id="readSize">Diminished</strong><span>Size</span></div>
+    </div>
+
+    <div class="table-wrap">
+      <table id="caseTable">
+        <thead><tr><th>Object position</th><th>Image position</th><th>Size</th><th>Nature</th></tr></thead>
+        <tbody>
+          <tr data-case="beyond2f"><td>Beyond 2F</td><td>Between F and 2F</td><td>Diminished</td><td>Real, inverted</td></tr>
+          <tr data-case="at2f"><td>At 2F</td><td>At 2F</td><td>Same size</td><td>Real, inverted</td></tr>
+          <tr data-case="between"><td>Between F and 2F</td><td>Beyond 2F</td><td>Enlarged</td><td>Real, inverted</td></tr>
+          <tr data-case="atf"><td>At F</td><td>At infinity</td><td>Highly enlarged</td><td>Real, inverted</td></tr>
+          <tr data-case="inside"><td>Between F and lens</td><td>Same side as object</td><td>Enlarged</td><td>Virtual, erect</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="concept-grid">
+    <div class="concept-card reveal">
+      <h4>Convex lens</h4>
+      <p>A lens that is thicker in the middle. It bends parallel rays so they meet at the principal focus F, so it is also called a converging lens.</p>
+      <span class="formula">f = distance from O to F</span>
+    </div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;">
+      <h4>Lens formula</h4>
+      <p>Relates object distance u, image distance v and focal length f, using the Cartesian sign convention.</p>
+      <span class="formula">1/f = 1/v − 1/u</span>
+    </div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;">
+      <h4>Magnification</h4>
+      <p>Ratio of image height to object height. A negative value means the image is inverted (and real); a positive value means erect.</p>
+      <span class="formula">m = hᵢ / hₒ = v / u</span>
+    </div>
+    <div class="concept-card reveal" style="transition-delay:0.24s;">
+      <h4>Real vs virtual</h4>
+      <p>A real image forms on the opposite side and can be caught on a screen. A virtual image forms on the object's side and cannot — like in a magnifying glass.</p>
+      <span class="formula">Inside F → virtual, erect, enlarged</span>
+    </div>
+  </div>
+</div>
+
+<section class="section-tight" id="resourcesSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">RESOURCES</span>
+      <h2>Practice with past questions</h2>
+      <p>Previous year questions for this chapter — download and practice offline.</p>
+    </div>
+    <div class="resource-grid" id="resourceGrid" data-chapter="lenses"></div>
+  </div>
+</section>
+
+<section class="section-tight" id="quizSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">PRACTICE</span>
+      <h2>Check your understanding</h2>
+      <p>Eight quick questions on where images form.</p>
+    </div>
+    <div class="game-shell reveal" id="quizShell" style="margin:0;"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="footer-logo" width="77" height="34" />
+        </div>
+        <div class="footer-slogan">learn science in a fun and easy way — don't memorise it.</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Science Pro. All rights reserved.</span>
+      <span>Built for curious students, classes 5–12.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/chapter-resources.js" defer></script>
+<script src="js/lenses.js" defer></script>
+</body>
+</html>
