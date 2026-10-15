@@ -107,6 +107,14 @@ const SITE_DATA = {
         status: "live",
         page: "statistics.html",
       },
+      {
+        id: "polynomials",
+        title: "Polynomials and Equations",
+        tag: "Chapter 9",
+        desc: "Type in a second degree equation and see its solutions and graph.",
+        status: "live",
+        page: "polynomials.html",
+      },
     ],
     biology: [
       {
