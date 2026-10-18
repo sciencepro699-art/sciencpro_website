@@ -108,6 +108,14 @@ const SITE_DATA = {
         page: "statistics.html",
       },
       {
+        id: "second-degree-equations",
+        title: "Second Degree Equations",
+        tag: "Chapter 5",
+        desc: "Watch a square get completed tile by tile and solve the equation.",
+        status: "live",
+        page: "seconddegree.html",
+      },
+      {
         id: "polynomials",
         title: "Polynomials and Equations",
         tag: "Chapter 9",
