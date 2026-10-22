@@ -116,6 +116,14 @@ const SITE_DATA = {
         page: "seconddegree.html",
       },
       {
+        id: "trigonometry",
+        title: "Trigonometry",
+        tag: "Chapter 6",
+        desc: "Use the two special right triangles and sin, cos and tan to find the sides of a right triangle.",
+        status: "live",
+        page: "trigonometry.html",
+      },
+      {
         id: "polynomials",
         title: "Polynomials and Equations",
         tag: "Chapter 9",
