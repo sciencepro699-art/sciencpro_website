@@ -124,6 +124,14 @@ const SITE_DATA = {
         page: "trigonometry.html",
       },
       {
+        id: "coordinates",
+        title: "Coordinates",
+        tag: "Chapter 7",
+        desc: "Mark points on the axes and learn distance, midpoint and ratio formulas.",
+        status: "live",
+        page: "coordinates.html"
+      },
+      {
         id: "polynomials",
         title: "Polynomials and Equations",
         tag: "Chapter 9",
