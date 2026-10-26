@@ -42,7 +42,7 @@ Every `<script src="...">` tag has `defer`:
 
 ```html
 <script src="js/data.js" defer></script>
-<script src="js/main.js" defer></script>
+<script src="js/main.js" defer></script><script src="js/social.js" defer></script>
 ```
 
 `defer` scripts download in parallel with the rest of the page instead
