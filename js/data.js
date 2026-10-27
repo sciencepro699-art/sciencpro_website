@@ -99,14 +99,8 @@ const SITE_DATA = {
       },
     ],
     maths: [
-      {
-        id: "statistics",
-        title: "Statistics",
-        tag: "Chapter 13",
-        desc: "See why the mean can mislead, then find the median from a table.",
-        status: "live",
-        page: "statistics.html",
-      },
+            { id: "arithmetic", title: "Arithmetic Sequences", tag: "Chapter 1", desc: "Build a sequence, find any term, pairs, and the sum of n terms.", status: "live", page: "arithmetic.html" },
+     
       {
         id: "second-degree-equations",
         title: "Second Degree Equations",
@@ -123,6 +117,7 @@ const SITE_DATA = {
         status: "live",
         page: "trigonometry.html",
       },
+
       {
         id: "coordinates",
         title: "Coordinates",
@@ -138,6 +133,14 @@ const SITE_DATA = {
         desc: "Type in a second degree equation and see its solutions and graph.",
         status: "live",
         page: "polynomials.html",
+      },
+       {
+        id: "statistics",
+        title: "Statistics",
+        tag: "Chapter 13",
+        desc: "See why the mean can mislead, then find the median from a table.",
+        status: "live",
+        page: "statistics.html",
       },
     ],
     biology: [
