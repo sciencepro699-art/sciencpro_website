@@ -100,7 +100,7 @@ const SITE_DATA = {
     ],
     maths: [
             { id: "arithmetic", title: "Arithmetic Sequences", tag: "Chapter 1", desc: "Build a sequence, find any term, pairs, and the sum of n terms.", status: "live", page: "arithmetic.html" },
-     
+     { id: "circles", title: "Circles and Angles", tag: "Chapter 2", desc: "Drag points on a circle and discover the angle and chord rules.", status: "live", page: "circles.html" },
       {
         id: "second-degree-equations",
         title: "Second Degree Equations",
