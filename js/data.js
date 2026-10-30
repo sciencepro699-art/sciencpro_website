@@ -127,6 +127,14 @@ const SITE_DATA = {
         page: "coordinates.html"
       },
       {
+  id: "tangents",
+  title: "Tangents",
+  tag: "Chapter 8",
+  desc: "Drag points and see why a tangent meets the radius at 90°, why two tangents from a point are equal, and how PA × PB = PC².",
+  status: "live",
+  page: "tangents.html",
+},
+      {
         id: "polynomials",
         title: "Polynomials and Equations",
         tag: "Chapter 9",
