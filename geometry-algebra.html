@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Geometry and Algebra — Class 10 Maths — Science Pro</title>
+<meta name="description" content="Tap points on a grid to find midpoints, dividing points, slope, the equation of a line, the equation of a circle and the fourth vertex of a parallelogram." />
+<link rel="icon" href="assets/logo-transparent.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts never block first paint: preload warms the cache, the stylesheet
+     itself is tagged media="print" so the browser doesn't wait on it to
+     render, then js/main.js flips it to media="all" the instant it's
+     ready. See PERFORMANCE.md. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" media="print" id="webfontsLink" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/lab.css" />
+<link rel="prefetch" href="subject.html?class=10&amp;subject=maths" />
+<style>
+  :root{ --c-chapter-accent: var(--c-maths); }
+  #gaCanvas{ display:block; width:100%; max-width:420px; height:auto; aspect-ratio:1/1; margin:0 auto; border-radius:12px; background:#fff; touch-action:none; cursor:pointer; }
+</style>
+</head>
+<body>
+<header class="site-header is-dark">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="brand-logo" width="73" height="32" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="classes.html">Classes</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero" style="padding-bottom:80px;">
+  <div class="container">
+    <div class="crumb" style="color:rgba(250,247,241,.6); margin-bottom:14px;">
+      <a href="classes.html">Classes</a><span class="sep">/</span>
+      <a href="class10.html">Class 10</a><span class="sep">/</span>
+      <a href="subject.html?class=10&subject=maths">Maths</a><span class="sep">/</span>
+      <span>Geometry and Algebra</span>
+    </div>
+    <span class="eyebrow">CHAPTER 11 · MATHS</span>
+    <h1>Geometry and Algebra</h1>
+    <p>Points on a grid can tell you a lot. Tap a point and see its midpoint, slope, line equation and circle equation appear, with the numbers worked out for you.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="lab-card reveal">
+    <h2 class="lab-title">Coordinate lab</h2>
+    <p class="lab-sub" id="gaHint"></p>
+    <div class="preset-row" id="gaModes">
+      <button class="preset-btn active" type="button" data-m="div">Dividing a line</button>
+      <button class="preset-btn" type="button" data-m="slope">Slope and line</button>
+      <button class="preset-btn" type="button" data-m="circle">Circle equation</button>
+      <button class="preset-btn" type="button" data-m="para">Parallelogram</button>
+    </div>
+    <div class="stage"><canvas id="gaCanvas" width="840" height="840" aria-label="A coordinate grid. Tap or drag the points to move them."></canvas></div>
+    <div class="slider-grid" id="gaSl-div">
+      <div class="sl"><span>m = <b id="gaMv">2</b></span><input type="range" id="gaM" min="1" max="5" step="1" value="2" aria-label="m" /></div>
+      <div class="sl"><span>n = <b id="gaNv">1</b></span><input type="range" id="gaN" min="1" max="5" step="1" value="1" aria-label="n" /></div>
+    </div>
+    <div class="slider-grid" id="gaSl-circle" hidden>
+      <div class="sl"><span>Radius r = <b id="gaRv">3</b></span><input type="range" id="gaR" min="1" max="6" step="1" value="3" aria-label="Radius" /></div>
+    </div>
+    <div class="tools" id="gaTools"><button class="preset-btn go" type="button" id="gaMid">Make it the midpoint (1 : 1)</button></div>
+    <div class="result-box" id="gaResult" aria-live="polite"></div>
+    <div class="eq-box"><div class="eq-title">Formula</div><div class="eq1" id="gaEq1"></div><div class="eq2" id="gaEq2"></div></div>
+  </div>
+</div>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">KEY IDEAS</span>
+      <h2>Four things to remember</h2>
+    </div>
+    <div class="concept-grid">
+      <div class="concept-card reveal"><h4>Dividing a line</h4><p>The point P that divides AB in the ratio m : n. When m = n, P is the midpoint.</p><span class="formula">x = x₁ + m/(m+n) × (x₂ − x₁)</span></div>
+      <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Slope</h4><p>How steep a line is: the rise divided by the run between two points on it.</p><span class="formula">slope = (y₂ − y₁) ÷ (x₂ − x₁)</span></div>
+      <div class="concept-card reveal"><h4>Circle</h4><p>A circle with centre (a, b) and radius r. Every point (x, y) on it is r away from the centre.</p><span class="formula">(x − a)² + (y − b)² = r²</span></div>
+      <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Parallelogram</h4><p>The diagonals share one midpoint, so the fourth vertex D is found from A, B and C.</p><span class="formula">D = (x₁ + x₃ − x₂, y₁ + y₃ − y₂)</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight" id="resourcesSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">RESOURCES</span>
+      <h2>Practice with past questions</h2>
+      <p>Previous year questions for this chapter — download and practice offline.</p>
+    </div>
+    <div class="resource-grid" id="resourceGrid" data-chapter="geometry-algebra"></div>
+  </div>
+</section>
+
+<section class="section-tight" id="quizSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">PRACTICE</span>
+      <h2>Check your understanding</h2>
+      <p>Ten quick questions.</p>
+    </div>
+    <div class="game-shell reveal" id="quizShell" style="margin:0;"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="footer-logo" width="77" height="34" />
+        </div>
+        <div class="footer-slogan">learn science in a fun and easy way — don't memorise it.</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Science Pro. All rights reserved.</span>
+      <span>Built for curious students, classes 5–12.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/social.js" defer></script>
+<script src="js/chapter-resources.js" defer></script>
+<script src="js/quiz.js" defer></script>
+<script src="js/geometry-algebra.js" defer></script>
+</body>
+</html>

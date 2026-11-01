@@ -1,246 +1,160 @@
-/* Statistics — Class 10 Maths, Chapter 13 (simple version)
-   Lab 1: drag one income, watch mean vs median.
-   Lab 2: median from a class-interval table (textbook method).
+/* Statistics — Class 10 Maths, Chapter 13 (student heights).
+   Lab 1: a class lined up by height; a new student joins; mean vs median.
+   Lab 2: median from a height table (textbook method).
    Quiz: 5 questions. */
 
-function statIN(x) { return Math.round(x).toLocaleString("en-IN"); }
+function statOrd(n) { const t = n % 100, d = n % 10; return n + (t > 10 && t < 14 ? "th" : d === 1 ? "st" : d === 2 ? "nd" : d === 3 ? "rd" : "th"); }
 function statClean(x) { return parseFloat(Number(x).toFixed(2)).toString(); }
-function statMedian(a) {
-  const s = a.slice().sort((x, y) => x - y), n = s.length;
-  return n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2;
+function statSizeCanvas(c) {
+  const dpr = Math.min(window.devicePixelRatio || 1, 2), W = c.clientWidth, H = c.clientHeight;
+  c.width = Math.round(W * dpr); c.height = Math.round(H * dpr);
+  const x = c.getContext("2d"); x.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { ctx: x, W: W, H: H };
 }
 
-/* ---------- Lab 1: mean vs median ---------- */
+/* ---------- Lab 1: line up the class ---------- */
 (function () {
   "use strict";
-  const canvas = document.getElementById("meanCanvas");
+  const canvas = document.getElementById("hCanvas");
   if (!canvas) return;
-  const ctx = canvas.getContext("2d");
-  const BASE = [16500, 21700, 18600, 21050, 19500, 17000, 21000, 18000, 22000, 17500];
-  const MIN_V = 10000, MAX_V = 200000, H = 230, PAD = 30;
-  const slider = document.getElementById("outlierSlider");
-  const label = document.getElementById("outlierLabel");
-  const rMean = document.getElementById("readMean");
-  const rMed = document.getElementById("readMedian");
-  const note = document.getElementById("meanNote");
-  const presets = document.querySelectorAll(".outlier-preset");
-  let val = 20000, W = 600, dragging = false, pending = false;
+  const BASE = [138, 142, 145, 147, 150, 152, 155, 158, 160];
+  const slider = document.getElementById("hSlider"), val = document.getElementById("hVal");
+  const resEl = document.getElementById("hResult"), noteEl = document.getElementById("hNote");
+  const sum = (a) => a.reduce((s, v) => s + v, 0);
+  const MEAN0 = sum(BASE) / BASE.length, MED0 = BASE[4];
+  let size = null;
 
-  const xOf = (v) => PAD + ((v - MIN_V) / (MAX_V - MIN_V)) * (W - 2 * PAD);
-  const vOf = (x) => MIN_V + ((x - PAD) / (W - 2 * PAD)) * (MAX_V - MIN_V);
-  function stats() {
-    const all = BASE.concat([val]);
-    return { mean: all.reduce((a, b) => a + b, 0) / all.length, med: statMedian(all) };
+  function calc(h) {
+    const list = BASE.map((v) => ({ v: v, isNew: false }));
+    list.push({ v: h, isNew: true });
+    list.sort((a, b) => a.v - b.v || (a.isNew ? 1 : -1));
+    const n = list.length, mean = sum(list.map((s) => s.v)) / n;
+    const mid = n % 2 ? [(n - 1) / 2] : [n / 2 - 1, n / 2];
+    const median = mid.reduce((s, i) => s + list[i].v, 0) / mid.length;
+    return { list: list, n: n, mean: mean, median: median, mid: mid };
   }
-  function updateUI() {
-    const s = stats();
-    label.textContent = "Rs " + statIN(val);
-    slider.value = String(val);
-    rMean.textContent = "Rs " + statIN(s.mean);
-    rMed.textContent = "Rs " + statIN(s.med);
-    note.textContent = val > 60000
-      ? "One very high income pulled the mean up a lot. The median hardly moved, so it is the better average here."
-      : "The new income is close to the others, so mean and median are both near Rs 19,000. Drag the dot far to the right!";
-    presets.forEach((b) => b.classList.toggle("active", Math.abs(+b.dataset.val - val) < 250));
-  }
-  function setVal(v) { val = Math.max(MIN_V, Math.min(MAX_V, v)); updateUI(); redraw(); }
-  function resize() {
-    const dpr = window.devicePixelRatio || 1;
-    W = canvas.clientWidth || 600;
-    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    redraw();
-  }
-  function redraw() {
-    if (pending) return;
-    pending = true;
-    requestAnimationFrame(() => { pending = false; draw(); });
-  }
-  function draw() {
-    const axisY = H - 50;
-    ctx.fillStyle = "#10162E"; ctx.fillRect(0, 0, W, H);
-    ctx.strokeStyle = "rgba(250,247,241,0.4)"; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(PAD - 10, axisY); ctx.lineTo(W - PAD + 10, axisY); ctx.stroke();
-    ctx.font = "500 10px 'JetBrains Mono', monospace"; ctx.textAlign = "center";
-    [10000, 50000, 100000, 150000, 200000].forEach((t) => {
-      ctx.fillStyle = "rgba(250,247,241,0.6)";
-      ctx.fillText(statIN(t / 1000) + "k", xOf(t), axisY + 18);
+
+  function draw(r) {
+    if (!size) return;
+    const ctx = size.ctx, W = size.W, H = size.H, n = r.n;
+    const top = 34, base = H - 30, slot = W / n;
+    const hs = (v) => (v - 100) / 100 * (base - top - 30) + 36; // body height in px
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = "#d9d3c7"; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(0, base); ctx.lineTo(W, base); ctx.stroke();
+    ctx.textAlign = "center";
+    r.list.forEach((s, i) => {
+      const cx = slot * (i + 0.5), bw = Math.min(slot * 0.62, 34), bh = hs(s.v), headR = Math.min(bw * 0.42, 11);
+      const isMid = r.mid.indexOf(i) >= 0;
+      ctx.fillStyle = isMid ? "#FF5A1F" : s.isNew ? "#1a1a2e" : "#A78BFA";
+      const by = base - bh + headR * 2 + 3;
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(cx - bw / 2, by, bw, base - by, 6); else ctx.rect(cx - bw / 2, by, bw, base - by);
+      ctx.fill();
+      ctx.beginPath(); ctx.arc(cx, base - bh + headR, headR, 0, 6.2832); ctx.fill();
+      ctx.fillStyle = "#1a1a2e"; ctx.font = "700 " + (slot < 36 ? 11 : 13) + "px Inter, sans-serif";
+      ctx.fillText(String(s.v), cx, base + 18);
+      if (s.isNew) { ctx.font = "700 11px Inter, sans-serif"; ctx.fillText("NEW", Math.min(Math.max(cx, 16), W - 16), base - bh - 8); }
     });
-    const all = BASE.map((v) => ({ v, out: false })).concat([{ v: val, out: true }]).sort((a, b) => a.v - b.v);
-    const placed = [];
-    all.forEach((d) => {
-      const x = xOf(d.v); let lv = 0;
-      placed.forEach((p) => { if (Math.abs(p - x) < 9) lv++; });
-      placed.push(x); d.x = x; d.y = axisY - 11 - lv * 11;
-    });
-    const s = stats(), mx = xOf(s.mean), dx = xOf(s.med);
-    ctx.setLineDash([5, 4]); ctx.lineWidth = 1.6;
-    ctx.strokeStyle = "#FF7A29"; ctx.beginPath(); ctx.moveTo(mx, 26); ctx.lineTo(mx, axisY); ctx.stroke();
-    ctx.strokeStyle = "#4FC3F7"; ctx.beginPath(); ctx.moveTo(dx, 42); ctx.lineTo(dx, axisY); ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.font = "600 11px 'JetBrains Mono', monospace";
-    ctx.fillStyle = "#FF7A29"; ctx.textAlign = mx > W / 2 ? "right" : "left";
-    ctx.fillText("mean " + statIN(s.mean), mx + (mx > W / 2 ? -6 : 6), 24);
-    ctx.fillStyle = "#4FC3F7"; ctx.textAlign = dx > W / 2 ? "right" : "left";
-    ctx.fillText("median " + statIN(s.med), dx + (dx > W / 2 ? -6 : 6), 40);
-    all.forEach((d) => {
-      ctx.beginPath(); ctx.arc(d.x, d.y, 4.5, 0, Math.PI * 2);
-      ctx.fillStyle = d.out ? "#FFB03A" : "#A78BFA"; ctx.fill();
-      if (d.out) {
-        ctx.strokeStyle = "#fff"; ctx.lineWidth = 1.5;
-        ctx.beginPath(); ctx.arc(d.x, d.y, 9, 0, Math.PI * 2); ctx.stroke();
-        ctx.fillStyle = "rgba(250,247,241,0.8)"; ctx.font = "600 10px 'JetBrains Mono', monospace";
-        ctx.textAlign = d.x > W - 90 ? "right" : "left";
-        ctx.fillText("drag me", d.x + (d.x > W - 90 ? -14 : 14), d.y + 4);
-      }
-    });
+    // mean line
+    const my = base - hs(r.mean) + 0;
+    ctx.strokeStyle = "#1a1a2e"; ctx.lineWidth = 1.8; ctx.setLineDash([7, 5]);
+    ctx.beginPath(); ctx.moveTo(0, my); ctx.lineTo(W, my); ctx.stroke(); ctx.setLineDash([]);
+    ctx.font = "700 12px Inter, sans-serif"; ctx.textAlign = "left"; ctx.fillStyle = "#1a1a2e";
+    ctx.setLineDash([5, 3]); ctx.beginPath(); ctx.moveTo(6, 12); ctx.lineTo(26, 12); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillText("mean " + statClean(Math.round(r.mean * 10) / 10), 31, 16);
+    ctx.textAlign = "right"; ctx.fillStyle = "#c2410c";
+    ctx.fillText("middle", W - 6, 16);
+    ctx.fillStyle = "#FF5A1F"; ctx.fillRect(W - 6 - ctx.measureText("middle").width - 16, 6, 11, 11);
   }
-  const px = (e) => { const r = canvas.getBoundingClientRect(); return ((e.clientX - r.left) / r.width) * W; };
-  canvas.addEventListener("pointerdown", (e) => { dragging = true; canvas.setPointerCapture(e.pointerId); setVal(vOf(px(e))); e.preventDefault(); });
-  canvas.addEventListener("pointermove", (e) => { if (dragging) setVal(vOf(px(e))); });
-  const end = (e) => { if (!dragging) return; dragging = false; try { canvas.releasePointerCapture(e.pointerId); } catch (_) {} };
-  canvas.addEventListener("pointerup", end);
-  canvas.addEventListener("pointercancel", end);
-  slider.addEventListener("input", () => setVal(parseFloat(slider.value)));
-  presets.forEach((b) => b.addEventListener("click", () => setVal(+b.dataset.val)));
+
+  function update() {
+    const h = +slider.value; val.textContent = h + " cm";
+    const r = calc(h), n = r.n, tot = sum(r.list.map((s) => s.v));
+    const m = Math.round(r.mean * 10) / 10;
+    const a = r.list[r.mid[0]].v, b = r.list[r.mid[1]].v;
+    resEl.innerHTML =
+      '<div class="line">Mean = ' + tot + ' ÷ ' + n + ' = <b>' + statClean(m) + ' cm</b></div>' +
+      '<div class="line found">Median = (' + a + ' + ' + b + ') ÷ 2 = <b>' + statClean(r.median) + ' cm</b></div>' +
+      '<div class="line note">10 students: the middle is the 5th and 6th (orange).</div>';
+    const dMean = r.mean - MEAN0, dMed = r.median - MED0;
+    noteEl.textContent = Math.abs(dMean) >= 1.5
+      ? "Without the new student: mean " + statClean(Math.round(MEAN0 * 10) / 10) + ", median " + MED0 + ". The mean moved " + statClean(Math.round(Math.abs(dMean) * 10) / 10) + " cm, the median only " + statClean(Math.abs(dMed)) + " cm."
+      : "The new student is close to the others, so both averages stay near 150 cm. Try Very tall!";
+    draw(r);
+  }
+
+  function resize() { size = statSizeCanvas(canvas); update(); }
+  slider.addEventListener("input", update);
+  document.querySelectorAll("[data-h]").forEach((b) => b.addEventListener("click", () => { slider.value = b.dataset.h; update(); }));
   window.addEventListener("resize", resize);
-  resize(); updateUI();
-  window.__statMean = { stats, setVal };
+  resize();
+  window.__statH = { calc: calc };
 })();
 
-/* ---------- Lab 2: median from a class table ---------- */
+/* ---------- Lab 2: median from a height table ---------- */
 (function () {
   "use strict";
-  const canvas = document.getElementById("medianCanvas");
+  const canvas = document.getElementById("tCanvas");
   if (!canvas) return;
-  const ctx = canvas.getContext("2d");
-  const SETS = {
-    wages: { title: "41 workers sorted by daily wage (Rs)", rows: [[400, 500, 6], [500, 600, 7], [600, 700, 10], [700, 800, 9], [800, 900, 5], [900, 1000, 4]] },
-    age:   { title: "46 employees sorted by age (years)", rows: [[25, 30, 4], [30, 35, 7], [35, 40, 8], [40, 45, 10], [45, 50, 9], [50, 55, 8]] },
-    marks: { title: "40 children sorted by marks", rows: [[0, 10, 4], [10, 20, 7], [20, 30, 9], [30, 40, 12], [40, 50, 8]] },
-  };
-  const titleEl = document.getElementById("setTitle");
-  const tbody = document.querySelector("#medTable tbody");
-  const stepsEl = document.getElementById("medSteps");
-  const answerEl = document.getElementById("medAnswer");
-  const btns = document.querySelectorAll(".set-btn");
-  let rows = [], res = null, W = 600, H = 220, pending = false;
-  const ord = (n) => { const s = ["th", "st", "nd", "rd"], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); };
+  const ROWS = [[130, 140, 3], [140, 150, 10], [150, 160, 10], [160, 170, 12], [170, 180, 6]];
+  const body = document.querySelector("#medTable tbody"), btn = document.getElementById("medBtn");
+  const box = document.getElementById("medBox"), stepsEl = document.getElementById("medSteps"), ansEl = document.getElementById("medAnswer");
+  const n = ROWS.reduce((s, r) => s + r[2], 0), pos = (n + 1) / 2;
+  let cum = 0, before = 0, mc = -1;
+  const cums = ROWS.map((r) => (cum += r[2]));
+  for (let i = 0; i < ROWS.length; i++) if (cums[i] >= pos) { mc = i; break; }
+  before = mc ? cums[mc - 1] : 0;
+  const lo = ROWS[mc][0], w = ROWS[mc][1] - lo, f = ROWS[mc][2], gap = w / f;
+  const first = lo + gap / 2, k = pos - before - 1, median = first + k * gap;
+  let shown = false, size = null;
 
-  function solve() {
-    const n = rows.reduce((a, r) => a + r[2], 0);
-    const cum = []; rows.reduce((a, r) => { a += r[2]; cum.push(a); return a; }, 0);
-    const out = { n, cum, items: [], boundary: -1, median: 0 };
-    const pos = n % 2 ? [(n + 1) / 2] : [n / 2, n / 2 + 1];
-    out.pos = pos;
-    if (n % 2 === 0) {
-      const b = cum.findIndex((c, i) => c === n / 2 && i < rows.length - 1);
-      if (b >= 0) { out.boundary = b; out.median = rows[b][1]; return out; }
-    }
-    pos.forEach((p) => {
-      const i = cum.findIndex((c) => c >= p);
-      const before = i ? cum[i - 1] : 0, lo = rows[i][0], hi = rows[i][1], f = rows[i][2];
-      const gap = (hi - lo) / f, first = lo + gap / 2, j = p - before;
-      out.items.push({ p, i, before, lo, hi, f, gap, first, j, value: first + (j - 1) * gap });
-    });
-    out.median = out.items.reduce((a, b) => a + b.value, 0) / out.items.length;
-    return out;
-  }
+  body.innerHTML = ROWS.map((r, i) => "<tr><td>" + r[0] + " – " + r[1] + "</td><td>" + r[2] + "</td><td>" + cums[i] + "</td></tr>").join("");
 
-  function steps(r) {
-    const s = [];
-    s.push(r.n % 2
-      ? "n = " + r.n + " (odd), so the median is the " + ord(r.pos[0]) + " item."
-      : "n = " + r.n + " (even), so take the " + ord(r.pos[0]) + " and " + ord(r.pos[1]) + " items and find their average.");
-    if (r.boundary >= 0) {
-      const b = r.boundary;
-      s.push("'Below " + rows[b][1] + "' is exactly " + r.cum[b] + ", which is half of " + r.n + ".");
-      s.push("So the median is " + rows[b][1] + " itself.");
-      return s;
-    }
-    const a = r.items[0];
-    s.push("Median class = " + a.lo + " – " + a.hi + " (" + a.before + " items come before it).");
-    s.push("Gap = " + (a.hi - a.lo) + " ÷ " + a.f + " = " + statClean(a.gap) + ". First item in the class = " + a.lo + " + " + statClean(a.gap / 2) + " = " + statClean(a.first) + ".");
-    r.items.forEach((it) => s.push("The " + ord(it.p) + " item is no. " + it.j + " in the class: " + statClean(it.first) + " + " + (it.j - 1) + " × " + statClean(it.gap) + " = " + statClean(it.value) + "."));
-    if (r.items.length === 2) s.push("Median = (" + statClean(r.items[0].value) + " + " + statClean(r.items[1].value) + ") ÷ 2 = " + statClean(r.median) + ".");
-    return s;
-  }
-
-  function render() {
-    res = solve();
-    const active = res.boundary >= 0 ? [res.boundary, res.boundary + 1] : res.items.map((i) => i.i);
-    tbody.innerHTML = "";
-    rows.forEach((r, i) => {
-      const tr = document.createElement("tr");
-      if (active.indexOf(i) >= 0) tr.className = "active";
-      [r[0] + " – " + r[1], String(r[2]), "Below " + r[1] + ": " + res.cum[i]].forEach((t) => {
-        const td = document.createElement("td"); td.textContent = t; tr.appendChild(td);
-      });
-      tbody.appendChild(tr);
-    });
-    stepsEl.innerHTML = "";
-    steps(res).forEach((t) => { const li = document.createElement("li"); li.textContent = t; stepsEl.appendChild(li); });
-    answerEl.textContent = "Median = " + statClean(res.median);
-    redraw();
-  }
-  function load(k) {
-    rows = SETS[k].rows.map((r) => r.slice());
-    titleEl.textContent = SETS[k].title;
-    btns.forEach((b) => b.classList.toggle("active", b.dataset.set === k));
-    render();
-  }
-  function resize() {
-    const dpr = window.devicePixelRatio || 1;
-    W = canvas.clientWidth || 600;
-    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    redraw();
-  }
-  function redraw() {
-    if (pending) return;
-    pending = true;
-    requestAnimationFrame(() => { pending = false; draw(); });
-  }
   function draw() {
-    ctx.fillStyle = "#10162E"; ctx.fillRect(0, 0, W, H);
-    if (!res) return;
-    const padL = 14, padR = 14, padT = 30, padB = 30, k = rows.length;
-    const lo = rows[0][0], hi = rows[k - 1][1], maxF = Math.max.apply(null, rows.map((r) => r[2]));
-    const pw = W - padL - padR, ph = H - padT - padB, base = padT + ph;
-    const xv = (v) => padL + ((v - lo) / (hi - lo)) * pw;
-    const yv = (f) => base - (f / (maxF + 1)) * ph;
-    let mx;
-    if (res.boundary >= 0) mx = res.median;
-    else {
-      const half = res.n / 2, i = res.cum.findIndex((c) => c >= half), before = i ? res.cum[i - 1] : 0;
-      mx = rows[i][0] + ((half - before) / rows[i][2]) * (rows[i][1] - rows[i][0]);
-    }
-    const xm = xv(mx);
-    rows.forEach((r) => {
-      const x1 = xv(r[0]), x2 = xv(r[1]), y = yv(r[2]);
-      ctx.fillStyle = "rgba(167,139,250,0.8)";
-      if (Math.min(x2, xm) > x1) ctx.fillRect(x1, y, Math.min(x2, xm) - x1, base - y);
-      ctx.fillStyle = "rgba(255,176,58,0.8)";
-      if (x2 > Math.max(x1, xm)) ctx.fillRect(Math.max(x1, xm), y, x2 - Math.max(x1, xm), base - y);
-      ctx.strokeStyle = "rgba(250,247,241,0.55)"; ctx.lineWidth = 1;
-      ctx.strokeRect(x1 + 0.5, y + 0.5, x2 - x1 - 1, base - y - 1);
-      ctx.fillStyle = "#FAF7F1"; ctx.font = "600 11px 'JetBrains Mono', monospace"; ctx.textAlign = "center";
-      ctx.fillText(String(r[2]), (x1 + x2) / 2, y - 6);
+    if (!size) return;
+    const ctx = size.ctx, W = size.W, H = size.H, pad = 14, base = H - 26, top = 24;
+    const slot = (W - pad * 2) / ROWS.length, mx = Math.max.apply(null, ROWS.map((r) => r[2]));
+    ctx.clearRect(0, 0, W, H); ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, W, H);
+    ctx.textAlign = "center"; ctx.font = "700 12px Inter, sans-serif";
+    ROWS.forEach((r, i) => {
+      const x = pad + slot * i, bh = r[2] / mx * (base - top);
+      ctx.fillStyle = shown && i === mc ? "#FF5A1F" : "#A78BFA";
+      ctx.fillRect(x + 3, base - bh, slot - 6, bh);
+      ctx.fillStyle = "#1a1a2e"; ctx.fillText(String(r[2]), x + slot / 2, base - bh - 6);
+      ctx.fillText(String(r[0]), x, base + 16);
     });
-    ctx.font = "500 10px 'JetBrains Mono', monospace"; ctx.fillStyle = "rgba(250,247,241,0.7)";
-    const every = W < 480 && k > 6 ? 2 : 1;
-    rows.forEach((r, i) => { if (i % every === 0) ctx.fillText(String(r[0]), xv(r[0]), base + 16); });
-    ctx.fillText(String(hi), xv(hi), base + 16);
-    ctx.setLineDash([5, 4]); ctx.strokeStyle = "#fff"; ctx.lineWidth = 1.8;
-    ctx.beginPath(); ctx.moveTo(xm, padT - 8); ctx.lineTo(xm, base); ctx.stroke(); ctx.setLineDash([]);
-    ctx.fillStyle = "#fff"; ctx.font = "700 11px 'JetBrains Mono', monospace";
-    ctx.textAlign = xm > W - 100 ? "right" : "left";
-    ctx.fillText("median = " + statClean(res.median), xm + (xm > W - 100 ? -6 : 6), padT - 12);
+    ctx.fillText(String(ROWS[ROWS.length - 1][1]), pad + slot * ROWS.length, base + 16);
+    if (shown) {
+      const x = pad + slot * mc + (median - lo) / w * slot;
+      ctx.strokeStyle = "#1a1a2e"; ctx.lineWidth = 2; ctx.setLineDash([6, 4]);
+      ctx.beginPath(); ctx.moveTo(x, top - 4); ctx.lineTo(x, base); ctx.stroke(); ctx.setLineDash([]);
+      const t = "median " + statClean(median), tw = ctx.measureText(t).width;
+      ctx.fillStyle = "#1a1a2e"; ctx.textAlign = x + tw > W - 4 ? "right" : "left";
+      ctx.fillText(t, x + (ctx.textAlign === "left" ? 6 : -6), 14);
+    }
   }
-  btns.forEach((b) => b.addEventListener("click", () => load(b.dataset.set)));
-  window.addEventListener("resize", resize);
-  resize(); load("wages");
-  window.__statMedian = { load, getResult: () => res };
+
+  function show() {
+    shown = true; btn.hidden = true; box.hidden = false;
+    const s = [
+      "n = " + n + " students (odd), so the median is the (" + n + " + 1) ÷ 2 = " + statOrd(pos) + " student.",
+      "Totals so far: " + cums.join(", ") + ". The " + statOrd(pos) + " student is in " + lo + " – " + (lo + w) + " cm. " + before + " students are before this group.",
+      f + " students share " + w + " cm, so the gap is " + w + " ÷ " + f + " = " + statClean(gap) + " cm. The first of them (the " + statOrd(before + 1) + " student) is at " + lo + " + " + statClean(gap / 2) + " = " + statClean(first) + " cm.",
+      "The " + statOrd(pos) + " student is " + k + " steps later: " + statClean(first) + " + " + k + " × " + statClean(gap) + " = " + statClean(median) + " cm."
+    ];
+    stepsEl.innerHTML = s.map((t) => "<li></li>").join("");
+    stepsEl.querySelectorAll("li").forEach((li, i) => (li.textContent = s[i]));
+    ansEl.textContent = "Median = " + statClean(median) + " cm";
+    body.children[mc].className = "active";
+    draw();
+  }
+
+  btn.addEventListener("click", show);
+  window.addEventListener("resize", () => { size = statSizeCanvas(canvas); draw(); });
+  size = statSizeCanvas(canvas); draw();
+  window.__statT = { median: median };
 })();
 
 /* ---------- Quiz ---------- */
@@ -249,21 +163,21 @@ function statMedian(a) {
   const shell = document.getElementById("quizShell");
   if (!shell) return;
   const questions = [
-    { q: "One household with a very high income moves in. Which average changes more?",
+    { q: "A very tall student joins a class. Which average changes more?",
       options: ["The mean", "The median", "Both equally", "Neither"], answer: 0,
-      explain: "A very large value pulls the mean a lot. The median depends only on the middle position." },
-    { q: "10 incomes in order have 18600 and 19500 in the middle. What is the median?",
-      options: ["18,600", "19,500", "19,050", "38,100"], answer: 2,
-      explain: "n is even, so take half the sum of the two middle values: (18600 + 19500) ÷ 2 = 19050." },
-    { q: "A table has 41 workers. The median is the value of which worker?",
-      options: ["20th", "21st", "41st", "Average of 20th and 21st"], answer: 1,
-      explain: "For odd n the median is the (n + 1) ÷ 2 th item: (41 + 1) ÷ 2 = 21st." },
-    { q: "Wages table (41 workers): median class 600–700, 13 workers before it, 10 in the class. What is the median wage?",
-      options: ["650", "675", "700", "605"], answer: 1,
-      explain: "Gap = 100 ÷ 10 = 10. The 14th worker earns 605. The 21st is 7 steps later: 605 + 7 × 10 = 675." },
-    { q: "In a table of 40 children, 'Below 30' is exactly 20. What is the median mark?",
-      options: ["25", "29", "30", "35"], answer: 2,
-      explain: "20 is exactly half of 40, so half the children are below 30. The median is 30 itself." },
+      explain: "A very tall height pulls the mean up. The median depends only on the middle position." },
+    { q: "9 students stand in order of height. Which student gives the median?",
+      options: ["4th", "5th", "9th", "The tallest"], answer: 1,
+      explain: "For odd n the median is the (n + 1) ÷ 2 th item: (9 + 1) ÷ 2 = 5th." },
+    { q: "10 students in order. The 5th is 150 cm and the 6th is 152 cm. What is the median height?",
+      options: ["150 cm", "151 cm", "152 cm", "302 cm"], answer: 1,
+      explain: "n is even, so take half the sum of the two middle values: (150 + 152) ÷ 2 = 151." },
+    { q: "41 students. The median class is 150 – 160 cm with 10 students and 13 students before it. What is the median height?",
+      options: ["155 cm", "157.5 cm", "160 cm", "150.5 cm"], answer: 1,
+      explain: "Gap = 10 ÷ 10 = 1. The 14th student is at 150.5. The 21st is 7 steps later: 150.5 + 7 = 157.5." },
+    { q: "In a table of 40 students, exactly 20 are below 150 cm. What is the median height?",
+      options: ["145 cm", "149 cm", "150 cm", "155 cm"], answer: 2,
+      explain: "20 is exactly half of 40, so half the students are below 150. The median is 150 itself." },
   ];
   let current = 0, score = 0, answered = false;
   function renderQuestion() {
@@ -305,7 +219,7 @@ function statMedian(a) {
   }
   function renderResults() {
     const total = questions.length, pct = Math.round((score / total) * 100);
-    let v = "Nice start. Try the labs again and retry.";
+    let v = "Nice start. Play with the labs again and retry.";
     if (pct >= 80) v = "Excellent! You've got mean and median.";
     else if (pct >= 50) v = "Good work. One more look at the steps and you've got it.";
     shell.innerHTML = `

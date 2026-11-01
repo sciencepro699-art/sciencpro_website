@@ -160,6 +160,14 @@ const SITE_DATA = {
   status: "live",
   page: "circles-lines.html",
 },
+{
+  id: "geometry-algebra",
+  title: "Geometry and Algebra",
+  tag: "Chapter 11",
+  desc: "Tap points on a grid to find midpoints, dividing points, slope, line and circle equations, and the fourth vertex of a parallelogram.",
+  status: "live",
+  page: "geometry-algebra.html",
+},
       // Add this inside topics.maths in js/data.js:
 {
   id: "solids",
