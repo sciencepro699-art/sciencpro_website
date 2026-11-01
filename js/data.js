@@ -110,6 +110,14 @@ const SITE_DATA = {
   status: "live",
   page: "chance.html",
 }, 
+{
+  id: "arithmetic-algebra",
+  title: "Arithmetic Sequences and Algebra",
+  tag: "Chapter 4",
+  desc: "Find the rule of a sequence, find it from two terms, and add up the terms quickly.",
+  status: "live",
+  page: "arithmetic-algebra.html",
+},
      {
         id: "second-degree-equations",
         title: "Second Degree Equations",

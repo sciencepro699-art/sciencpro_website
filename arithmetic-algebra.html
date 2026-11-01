@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Arithmetic Sequences and Algebra — Class 10 Maths — Science Pro</title>
+<meta name="description" content="Build an arithmetic sequence, find its algebraic form, find the form from two terms, and see how the sum of the first n terms works." />
+<link rel="icon" href="assets/logo-transparent.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts never block first paint: preload warms the cache, the stylesheet
+     itself is tagged media="print" so the browser doesn't wait on it to
+     render, then js/main.js flips it to media="all" the instant it's
+     ready. See PERFORMANCE.md. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" media="print" id="webfontsLink" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/lab.css" />
+<link rel="prefetch" href="subject.html?class=10&amp;subject=maths" />
+<style>
+  :root{ --c-chapter-accent: var(--c-maths); }
+  #aaCanvas{ display:block; width:100%; max-width:560px; height:auto; aspect-ratio:7/5; margin:0 auto; border-radius:12px; background:#fff; }
+  .tiles{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:14px 0 4px; min-height:48px; }
+  .tile{ min-width:46px; height:46px; padding:0 8px; border-radius:12px; border:2px solid var(--c-cream-dim); background:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--f-mono); font-weight:600; font-size:.95rem; }
+  .tile.hl{ border-color:#FF5A1F; background:rgba(255,90,31,.14); color:#c2410c; }
+  .tile.dots{ border-style:dashed; color:var(--c-ink-soft); }
+</style>
+</head>
+<body>
+<header class="site-header is-dark">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="brand-logo" width="73" height="32" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="classes.html">Classes</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero" style="padding-bottom:80px;">
+  <div class="container">
+    <div class="crumb" style="color:rgba(250,247,241,.6); margin-bottom:14px;">
+      <a href="classes.html">Classes</a><span class="sep">/</span>
+      <a href="class10.html">Class 10</a><span class="sep">/</span>
+      <a href="subject.html?class=10&subject=maths">Maths</a><span class="sep">/</span>
+      <span>Arithmetic Sequences and Algebra</span>
+    </div>
+    <span class="eyebrow">CHAPTER 4 · MATHS</span>
+    <h1>Arithmetic Sequences and Algebra</h1>
+    <p>A list of numbers that goes up by the same amount every step. Write it as one short rule, find the rule from two terms, and add up the terms quickly.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="lab-card reveal">
+    <h2 class="lab-title">Sequence lab</h2>
+    <p class="lab-sub" id="aaHint"></p>
+    <div class="preset-row" id="aaModes">
+      <button class="preset-btn active" type="button" data-m="form">Algebraic form</button>
+      <button class="preset-btn" type="button" data-m="two">From two terms</button>
+      <button class="preset-btn" type="button" data-m="sum">Sum of terms</button>
+    </div>
+    <div class="tiles" id="aaTiles" aria-live="polite"></div>
+    <div class="stage"><canvas id="aaCanvas" width="840" height="600" aria-label="A graph of the sequence. Each dot or bar is one term."></canvas></div>
+    <div class="slider-grid" id="aaSl-form">
+      <div class="sl"><span>First term = <b id="aaFv">5</b></span><input type="range" id="aaF" min="-10" max="20" step="1" value="5" aria-label="First term" /></div>
+      <div class="sl"><span>Common difference = <b id="aaDv">4</b></span><input type="range" id="aaD" min="-6" max="10" step="1" value="4" aria-label="Common difference" /></div>
+      <div class="sl"><span>Position n = <b id="aaNv">8</b></span><input type="range" id="aaN" min="1" max="10" step="1" value="8" aria-label="Position n" /></div>
+    </div>
+    <div class="slider-grid" id="aaSl-two" hidden>
+      <div class="sl"><span>Value of term <b id="aaPl">5</b> = <b id="aaPv">17</b></span><input type="range" id="aaP" min="-20" max="60" step="1" value="17" aria-label="First known term" /></div>
+      <div class="sl"><span>Value of term <b id="aaQl">9</b> = <b id="aaQv">29</b></span><input type="range" id="aaQ" min="-20" max="60" step="1" value="29" aria-label="Second known term" /></div>
+    </div>
+    <div class="preset-row" id="aaPos" hidden>
+      <button class="preset-btn" type="button" data-p="2" data-q="5">Terms 2 and 5</button>
+      <button class="preset-btn" type="button" data-p="3" data-q="7">Terms 3 and 7</button>
+      <button class="preset-btn active" type="button" data-p="5" data-q="9">Terms 5 and 9</button>
+    </div>
+    <div class="slider-grid" id="aaSl-sum" hidden>
+      <div class="sl"><span>Number of terms = <b id="aaSv">10</b></span><input type="range" id="aaS" min="2" max="20" step="1" value="10" aria-label="Number of terms" /></div>
+    </div>
+    <div class="preset-row" id="aaPre" hidden>
+      <button class="preset-btn" type="button" data-f="1" data-d="1">1, 2, 3 ...</button>
+      <button class="preset-btn" type="button" data-f="1" data-d="2">Odd numbers</button>
+      <button class="preset-btn" type="button" data-f="2" data-d="2">Even numbers</button>
+    </div>
+    <div class="result-box" id="aaResult" aria-live="polite"></div>
+    <div class="eq-box"><div class="eq-title">Formula</div><div class="eq1" id="aaEq1"></div><div class="eq2" id="aaEq2"></div></div>
+  </div>
+</div>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">KEY IDEAS</span>
+      <h2>Three things to remember</h2>
+    </div>
+    <div class="concept-grid">
+      <div class="concept-card reveal"><h4>Algebraic form</h4><p>The number in front of n is the common difference. The number added at the end is the first term minus the common difference.</p><span class="formula">xₙ = dn + (f − d)</span></div>
+      <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>From two terms</h4><p>Divide the change in value by the change in position to get d. Then put one known term in to find the rest.</p><span class="formula">d = (xq − xp) ÷ (q − p)</span></div>
+      <div class="concept-card reveal"><h4>Sum of terms</h4><p>Add the first and last term, multiply by the number of terms, and halve it.</p><span class="formula">Sum = (x₁ + xₙ) × n ÷ 2</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight" id="resourcesSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">RESOURCES</span>
+      <h2>Practice with past questions</h2>
+      <p>Previous year questions for this chapter — download and practice offline.</p>
+    </div>
+    <div class="resource-grid" id="resourceGrid" data-chapter="arithmetic"></div>
+  </div>
+</section>
+
+<section class="section-tight" id="quizSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">PRACTICE</span>
+      <h2>Check your understanding</h2>
+      <p>Ten quick questions.</p>
+    </div>
+    <div class="game-shell reveal" id="quizShell" style="margin:0;"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="footer-logo" width="77" height="34" />
+        </div>
+        <div class="footer-slogan">learn science in a fun and easy way — don't memorise it.</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Science Pro. All rights reserved.</span>
+      <span>Built for curious students, classes 5–12.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/social.js" defer></script>
+<script src="js/chapter-resources.js" defer></script>
+<script src="js/quiz.js" defer></script>
+<script src="js/arithmetic-algebra.js" defer></script>
+</body>
+</html>
