@@ -101,7 +101,16 @@ const SITE_DATA = {
     maths: [
             { id: "arithmetic", title: "Arithmetic Sequences", tag: "Chapter 1", desc: "Build a sequence, find any term, pairs, and the sum of n terms.", status: "live", page: "arithmetic.html" },
      { id: "circles", title: "Circles and Angles", tag: "Chapter 2", desc: "Drag points on a circle and discover the angle and chord rules.", status: "live", page: "circles.html" },
-      {
+     // Add this inside topics.maths in js/data.js:
+{
+  id: "chance",
+  title: "Mathematics of Chance",
+  tag: "Chapter 3",
+  desc: "Pick beads, draw cards, roll a die, throw dots at shapes and see probability as favourable over possible outcomes.",
+  status: "live",
+  page: "chance.html",
+}, 
+     {
         id: "second-degree-equations",
         title: "Second Degree Equations",
         tag: "Chapter 5",
@@ -142,6 +151,15 @@ const SITE_DATA = {
         status: "live",
         page: "polynomials.html",
       },
+      // Add this inside topics.maths in js/data.js:
+{
+  id: "circles-lines",
+  title: "Circles and Lines",
+  tag: "Chapter 10",
+  desc: "Move a point and turn chords, secants and a tangent. See PA × PB = PC × PD and PT² = PA × PB stay true.",
+  status: "live",
+  page: "circles-lines.html",
+},
       // Add this inside topics.maths in js/data.js:
 {
   id: "solids",

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Circles and Lines — Class 10 Maths — Science Pro</title>
+<meta name="description" content="Move a point inside or outside a circle, turn the chords and secants, and see PA × PB = PC × PD stay true. Includes the tangent and secant rule." />
+<link rel="icon" href="assets/logo-transparent.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts never block first paint: preload warms the cache, the stylesheet
+     itself is tagged media="print" so the browser doesn't wait on it to
+     render, then js/main.js flips it to media="all" the instant it's
+     ready. See PERFORMANCE.md. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" media="print" id="webfontsLink" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/lab.css" />
+<link rel="prefetch" href="subject.html?class=10&amp;subject=maths" />
+<style>
+  :root{ --c-chapter-accent: var(--c-maths); }
+  #clCanvas{ display:block; width:100%; max-width:420px; height:auto; aspect-ratio:1/1; margin:0 auto; border-radius:12px; background:#fff; }
+</style>
+</head>
+<body>
+<header class="site-header is-dark">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="brand-logo" width="73" height="32" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="classes.html">Classes</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero" style="padding-bottom:80px;">
+  <div class="container">
+    <div class="crumb" style="color:rgba(250,247,241,.6); margin-bottom:14px;">
+      <a href="classes.html">Classes</a><span class="sep">/</span>
+      <a href="class10.html">Class 10</a><span class="sep">/</span>
+      <a href="subject.html?class=10&subject=maths">Maths</a><span class="sep">/</span>
+      <span>Circles and Lines</span>
+    </div>
+    <span class="eyebrow">CHAPTER 10 · MATHS</span>
+    <h1>Circles and Lines</h1>
+    <p>Two lines cut through a circle. Multiply the two parts of one line, then the two parts of the other. Move them around and see what stays the same.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="lab-card reveal">
+    <h2 class="lab-title">Chord, secant and tangent lab</h2>
+    <p class="lab-sub">The circle has radius 5 cm. P is the point where the two lines meet. Move the sliders and watch the two products.</p>
+    <div class="preset-row" id="clModes">
+      <button class="preset-btn active" type="button" data-m="in">Two chords inside</button>
+      <button class="preset-btn" type="button" data-m="out">Two secants from outside</button>
+      <button class="preset-btn" type="button" data-m="tan">Tangent and secant</button>
+    </div>
+    <div class="stage"><canvas id="clCanvas" width="420" height="420" aria-label="A circle with two lines through the point P. The lengths are marked."></canvas></div>
+    <div class="slider-grid" id="clSliders"></div>
+    <div class="tools">
+      <button class="preset-btn go" type="button" id="clHide">Hide one length. I will find it</button>
+      <button class="preset-btn" type="button" id="clShow" hidden>Show the answer</button>
+    </div>
+    <div class="result-box" id="clResult" aria-live="polite"></div>
+    <div class="eq-box" id="clEq"></div>
+  </div>
+</div>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">KEY IDEAS</span>
+      <h2>Three rules to remember</h2>
+    </div>
+    <div class="concept-grid">
+      <div class="concept-card reveal"><h4>Two chords inside</h4><p>When two chords cross at P inside a circle, the two parts of one chord multiply to the same number as the two parts of the other.</p><span class="formula">PA × PB = PC × PD</span></div>
+      <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Two secants from outside</h4><p>Lines from an outside point P that cut the circle twice. Multiply P to the near point, by P to the far point, on each line.</p><span class="formula">PA × PB = PC × PD</span></div>
+      <div class="concept-card reveal"><h4>Tangent and secant</h4><p>The tangent touches the circle at one point T. Its length squared equals the near part times the far part of the secant.</p><span class="formula">PT² = PA × PB</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight" id="resourcesSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">RESOURCES</span>
+      <h2>Practice with past questions</h2>
+      <p>Previous year questions for this chapter — download and practice offline.</p>
+    </div>
+    <div class="resource-grid" id="resourceGrid" data-chapter="circles-lines"></div>
+  </div>
+</section>
+
+<section class="section-tight" id="quizSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">PRACTICE</span>
+      <h2>Check your understanding</h2>
+      <p>Ten quick questions.</p>
+    </div>
+    <div class="game-shell reveal" id="quizShell" style="margin:0;"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="footer-logo" width="77" height="34" />
+        </div>
+        <div class="footer-slogan">learn science in a fun and easy way — don't memorise it.</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Science Pro. All rights reserved.</span>
+      <span>Built for curious students, classes 5–12.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/social.js" defer></script>
+<script src="js/chapter-resources.js" defer></script>
+<script src="js/circles-lines.js" defer></script>
+</body>
+</html>

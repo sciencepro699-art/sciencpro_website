@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Mathematics of Chance — Class 10 Maths — Science Pro</title>
+<meta name="description" content="Pick beads, draw cards, roll a die, throw darts at a shape and pair up slips. See probability as favourable outcomes over possible outcomes, and watch real results settle toward it." />
+<link rel="icon" href="assets/logo-transparent.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts never block first paint: preload warms the cache, the stylesheet
+     itself is tagged media="print" so the browser doesn't wait on it to
+     render, then js/main.js flips it to media="all" the instant it's
+     ready. See PERFORMANCE.md. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" media="print" id="webfontsLink" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="prefetch" href="subject.html?class=10&amp;subject=maths" />
+<style>
+  :root{ --c-chapter-accent: var(--c-maths); }
+  .lab-title{ font-family: var(--f-display); font-size:1.25rem; margin:0 0 4px; }
+  .lab-sub{ font-size:0.9rem; color: var(--c-ink-soft); margin:0 0 16px; }
+  .preset-row{ display:flex; gap:10px; flex-wrap:wrap; margin:0 0 14px; }
+  .preset-btn{ font-family: var(--f-mono); font-size:0.78rem; padding:8px 14px; border-radius: var(--radius-pill); border:1.5px solid var(--c-cream-dim); background:#fff; color: var(--c-ink-soft); transition: all .2s ease; cursor:pointer; }
+  .preset-btn:hover, .preset-btn.active{ border-color: var(--c-maths); color:#6D4FD6; background: rgba(167,139,250,0.12); }
+  .slider-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px 24px; margin:14px 0; max-width:780px; margin-left:auto; margin-right:auto; }
+  .sl{ display:flex; flex-direction:column; gap:4px; font-family: var(--f-mono); font-size:0.82rem; color: var(--c-ink-soft); }
+  .sl b{ color:#6D4FD6; font-size:1rem; }
+  .sl input{ width:100%; accent-color:#7C5CE8; }
+  .tools{ display:flex; gap:10px; flex-wrap:wrap; margin:12px 0 0; }
+  .tools .go{ background:#7C5CE8; border-color:#7C5CE8; color:#fff; }
+  .tools .go:hover{ background:#6D4FD6; color:#fff; }
+  .stage{ background:#fff; border:1.5px solid var(--c-cream-dim); border-radius:var(--radius-md); padding:14px; max-width:780px; margin:0 auto; }
+  .tiles{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; min-height:56px; }
+  .tile{ min-width:44px; height:44px; padding:0 6px; border-radius:12px; border:2px solid var(--c-cream-dim); background:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--f-mono); font-weight:600; font-size:0.95rem; color:var(--c-ink-soft); transition:all .2s ease; }
+  .tile.fav{ border-color:#7C5CE8; background:rgba(167,139,250,0.22); color:#4B34B0; }
+  .tile.pick{ transform:scale(1.18); box-shadow:0 0 0 4px rgba(255,90,31,.45); }
+  .tile.bead{ width:44px; padding:0; border-radius:50%; border:3px solid transparent; }
+  .tile.bead.black{ background:#1f2937; } .tile.bead.white{ background:#f3f4f6; border-color:#cbd5e1; }
+  .tile.bead.fav{ border-color:#7C5CE8; box-shadow:0 0 0 3px rgba(124,92,232,.35); }
+  .tile.pair{ min-width:50px; font-size:0.78rem; }
+  .pairgrid{ display:grid; gap:6px; justify-content:center; }
+  .big-out{ text-align:center; font-family:var(--f-display); font-size:2.2rem; min-height:48px; margin:10px 0 0; color:#4B34B0; }
+  .evt-row{ margin-top:14px; }
+  .evt-label{ font-family:var(--f-mono); font-size:0.78rem; color:var(--c-ink-soft); flex-basis:100%; }
+  .result-box{ background: var(--c-cream-dim); border-radius: var(--radius-md); padding:16px 20px; margin-top:16px; font-family: var(--f-mono); font-size:0.88rem; line-height:1.9; }
+  .result-box .line.found{ color:#6D4FD6; font-weight:700; background:rgba(167,139,250,0.18); border-radius:8px; padding:0 8px; }
+  .result-box .line.note{ color: var(--c-ink-soft); }
+  .eq-box{ margin-top:16px; padding:14px 20px; border-radius:var(--radius-md); background:rgba(167,139,250,0.12); border-left:5px solid #7C5CE8; font-family:var(--f-display); }
+  .eq-title{ font-family:var(--f-mono); font-size:0.75rem; letter-spacing:.08em; text-transform:uppercase; color:#6D4FD6; margin-bottom:6px; }
+  .eq1{ font-size:1.15rem; font-weight:600; color:var(--c-ink); line-height:1.7; }
+  .eq2{ font-size:1rem; color:var(--c-ink-soft); line-height:1.7; }
+  .bars{ margin-top:16px; background:#fff; border:1.5px solid var(--c-cream-dim); border-radius:var(--radius-md); padding:12px 14px; }
+  .bar-row{ display:flex; align-items:center; gap:10px; font-family:var(--f-mono); font-size:0.8rem; color:var(--c-ink-soft); margin:6px 0; }
+  .bar-track{ position:relative; flex:1; height:16px; background:var(--c-cream-dim); border-radius:8px; }
+  .bar-fill{ height:100%; width:0; background:#7C5CE8; border-radius:8px; transition:width .25s ease; }
+  .bar-theory{ position:absolute; top:-3px; bottom:-3px; width:3px; background:#FF5A1F; border-radius:2px; }
+  #chArea{ display:block; width:100%; max-width:420px; height:auto; margin:0 auto; aspect-ratio:1/1; border-radius:12px; background:#fff; }
+  .concept-grid{ margin-top:0; }
+  .result-box .line, .eq1, .eq2, .bar-row, .evt-label{ overflow-wrap:anywhere; }
+  @media (max-width: 720px){
+    .lab-card{ padding:18px 12px; }
+    .preset-btn{ min-height:44px; padding:10px 14px; }
+    .sl input[type=range]{ height:32px; }
+    .stage{ padding:10px 8px; }
+    .tile{ min-width:40px; height:40px; }
+    .tile.bead{ width:40px; }
+    .big-out{ font-size:1.8rem; }
+    .result-box{ font-size:0.78rem; line-height:1.65; padding:12px 12px; }
+    .result-box .line.found{ padding:2px 8px; }
+    .eq-box{ padding:12px 14px; }
+    .eq1{ font-size:1.02rem; } .eq2{ font-size:0.92rem; }
+    .bar-row{ font-size:0.74rem; flex-wrap:wrap; }
+    .bar-row .bar-track{ flex-basis:100%; order:3; }
+    .game-shell-header{ flex-wrap:wrap; gap:8px; }
+    .game-shell-header .progress-track{ order:3; flex-basis:100%; min-width:0; }
+    .quiz-option{ overflow-wrap:anywhere; }
+  }
+  @media (max-width: 360px){ .preset-btn{ font-size:0.74rem; padding:10px 12px; } .tile{ min-width:36px; height:36px; font-size:0.85rem; } .tile.bead{ width:36px; } }
+  [hidden]{ display:none !important; }
+</style>
+</head>
+<body>
+<header class="site-header is-dark">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="brand-logo" width="73" height="32" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="classes.html">Classes</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero" style="padding-bottom:80px;">
+  <div class="container">
+    <div class="crumb" style="color:rgba(250,247,241,.6); margin-bottom:14px;">
+      <a href="classes.html">Classes</a><span class="sep">/</span>
+      <a href="class10.html">Class 10</a><span class="sep">/</span>
+      <a href="subject.html?class=10&subject=maths">Maths</a><span class="sep">/</span>
+      <span>Mathematics of Chance</span>
+    </div>
+    <span class="eyebrow">CHAPTER 3 · MATHS</span>
+    <h1>Mathematics of Chance</h1>
+    <p>Pick, draw, roll and throw. See probability as favourable outcomes out of all possible outcomes, then watch real tries settle toward it.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="lab-card reveal">
+    <h2 class="lab-title">Chance lab</h2>
+    <p class="lab-sub">Choose an experiment. Choose the event you are looking for. The lit-up outcomes are the favourable ones.</p>
+    <div class="preset-row" id="chModes">
+      <button class="preset-btn active" type="button" data-m="beads">Beads in a bag</button>
+      <button class="preset-btn" type="button" data-m="cards">Number cards</button>
+      <button class="preset-btn" type="button" data-m="die">Die</button>
+      <button class="preset-btn" type="button" data-m="boxes">Two boxes of slips</button>
+      <button class="preset-btn" type="button" data-m="area">Dot on a shape</button>
+    </div>
+    <div class="slider-grid" id="chSliders"></div>
+    <div class="stage">
+      <div class="tiles" id="chTiles"></div>
+      <div class="pairgrid" id="chPairs" hidden></div>
+      <canvas id="chArea" width="420" height="420" hidden aria-label="A shape with a shaded part. Dots land on it at random."></canvas>
+      <div class="big-out" id="chOut" aria-live="polite"></div>
+    </div>
+    <div class="preset-row evt-row" id="chEvents"></div>
+    <div class="tools" id="chTools"></div>
+    <div class="result-box" id="chResult" aria-live="polite"></div>
+    <div class="eq-box" id="chEq"></div>
+    <div class="bars" id="chBars"></div>
+  </div>
+</div>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">KEY IDEAS</span>
+      <h2>The four things to remember</h2>
+    </div>
+    <div class="concept-grid">
+      <div class="concept-card reveal"><h4>Favourable ÷ possible</h4><p>Probability is the number of outcomes we want, divided by the number of all possible outcomes. Every outcome must be equally likely.</p><span class="formula">P = favourable / possible</span></div>
+      <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Always between 0 and 1</h4><p>An impossible event has probability 0. A sure event has probability 1. Everything else is a fraction in between.</p><span class="formula">0 ≤ P ≤ 1</span></div>
+      <div class="concept-card reveal"><h4>Not happening</h4><p>The chance that something does not happen is what is left after taking its probability away from 1.</p><span class="formula">P(not E) = 1 − P(E)</span></div>
+      <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Probability from area</h4><p>When a dot falls at random on a figure, the chance of landing in a part is the area of that part divided by the whole area.</p><span class="formula">P = part area / whole area</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight" id="resourcesSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">RESOURCES</span>
+      <h2>Practice with past questions</h2>
+      <p>Previous year questions for this chapter — download and practice offline.</p>
+    </div>
+    <div class="resource-grid" id="resourceGrid" data-chapter="chance"></div>
+  </div>
+</section>
+
+<section class="section-tight" id="quizSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">PRACTICE</span>
+      <h2>Check your understanding</h2>
+      <p>Ten quick questions.</p>
+    </div>
+    <div class="game-shell reveal" id="quizShell" style="margin:0;"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="footer-logo" width="77" height="34" />
+        </div>
+        <div class="footer-slogan">learn science in a fun and easy way — don't memorise it.</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Science Pro. All rights reserved.</span>
+      <span>Built for curious students, classes 5–12.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/social.js" defer></script>
+<script src="js/chapter-resources.js" defer></script>
+<script src="js/chance.js" defer></script>
+</body>
+</html>
