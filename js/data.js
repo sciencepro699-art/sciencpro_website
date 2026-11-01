@@ -142,6 +142,15 @@ const SITE_DATA = {
         status: "live",
         page: "polynomials.html",
       },
+      // Add this inside topics.maths in js/data.js:
+{
+  id: "solids",
+  title: "Solids",
+  tag: "Chapter 12",
+  desc: "Turn pyramids, cones, spheres, hemispheres and cylinders in 3D. Light up each surface and see its area and volume change.",
+  status: "live",
+  page: "solids.html",
+},
        {
         id: "statistics",
         title: "Statistics",
