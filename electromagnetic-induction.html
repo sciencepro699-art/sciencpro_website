@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Electromagnetic Induction in Daily Life — Class 10 Physics — Science Pro</title>
+<meta name="description" content="Drag a magnet through a coil to make electricity, use a transformer, and see why power is sent at high voltage." />
+<link rel="icon" href="assets/logo-transparent.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts never block first paint: preload warms the cache, the stylesheet
+     itself is tagged media="print" so the browser doesn't wait on it to
+     render, then js/main.js flips it to media="all" the instant it's
+     ready. See PERFORMANCE.md. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" media="print" id="webfontsLink" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/lab.css" />
+<link rel="prefetch" href="subject.html?class=10&amp;subject=physics" />
+<style>
+  :root{ --c-chapter-accent: var(--c-physics); }
+  .lab-gap{ height:28px; }
+  .concept-grid{ margin-top:28px; }
+  canvas{ display:block; width:100%; }
+  .preset-btn:hover,.preset-btn.active{border-color:#0288D1;color:#0277BD;background:rgba(79,195,247,.14)}
+  .sl b{color:#0277BD}.sl input{accent-color:#0288D1}
+  .tools .go{background:#0288D1;border-color:#0288D1}.tools .go:hover{background:#0277BD}
+  .result-box .line.found{color:#0277BD;background:rgba(79,195,247,.2)}
+  .eq-box{background:rgba(79,195,247,.12);border-left-color:#0288D1}.eq-title{color:#0277BD}
+  .note-box{margin-top:14px;padding:12px 16px;border-radius:var(--radius-sm);background:rgba(79,195,247,.14);border-left:4px solid var(--c-physics);font-weight:600;font-size:.92rem;line-height:1.5}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+  .tab{font-family:var(--f-mono);font-size:.78rem;padding:10px 14px;min-height:44px;border-radius:var(--radius-pill);border:1.5px solid var(--c-cream-dim);background:#fff;color:var(--c-ink-soft);cursor:pointer}
+  .tab.on{border-color:#0288D1;background:#0288D1;color:#fff}
+  .stepper{display:flex;align-items:center;gap:6px}
+  .stepper button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--c-cream-dim);background:#fff;font-size:1.2rem;font-weight:700;cursor:pointer;color:#0277BD}
+  .stepper output{min-width:34px;text-align:center;font-family:var(--f-mono);font-weight:600}
+  .answer-pill{display:inline-block;padding:8px 16px;border-radius:var(--radius-pill);background:var(--c-navy);color:#fff;font-family:var(--f-mono);font-weight:600;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="site-header is-dark">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="brand-logo" width="73" height="32" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="classes.html">Classes</a>
+    </nav>
+</div>
+</header>
+
+<section class="page-hero" style="padding-bottom:80px;">
+  <div class="container">
+    <div class="crumb" style="color:rgba(250,247,241,.6); margin-bottom:14px;">
+      <a href="classes.html">Classes</a><span class="sep">/</span>
+      <a href="class10.html">Class 10</a><span class="sep">/</span>
+      <a href="subject.html?class=10&subject=physics">Physics</a><span class="sep">/</span>
+      <span>Electromagnetic Induction in Daily Life</span>
+    </div>
+    <span class="eyebrow">CHAPTER 6 · PHYSICS</span>
+    <h1>Electromagnetic Induction in Daily Life</h1>
+    <p>Move a magnet through a coil and make a current. Then change the voltage with a transformer and see why power stations send electricity at very high voltage.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="lab-card reveal">
+    <h2 class="lab-title">1 · Magnet and coil</h2>
+    <p class="lab-sub">Drag the magnet in and out of the coil. Watch the galvanometer needle and find out for yourself when it moves.</p>
+    <div class="stage"><canvas id="emCanvas" style="touch-action:none;cursor:grab" aria-label="A bar magnet that can be dragged towards a coil. A galvanometer shows the induced current."></canvas></div>
+    <div class="slider-grid">
+      <div class="sl"><span>Turns in the coil: <b id="emN">200</b></span><input type="range" id="emNs" min="50" max="400" step="50" value="200" aria-label="Number of turns" /></div>
+      <div class="sl"><span>Magnet strength: <b id="emB">1×</b></span><input type="range" id="emBs" min="1" max="3" step="1" value="1" aria-label="Magnet strength" /></div>
+    </div>
+    <div class="preset-row">
+      <button class="preset-btn" type="button" id="emIn">Push magnet in</button>
+      <button class="preset-btn" type="button" id="emOut">Pull magnet out</button>
+      <button class="preset-btn" type="button" id="emShake">Move in and out</button>
+      <button class="preset-btn" type="button" id="emFlip">Flip the magnet</button>
+    </div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">2 · The transformer</h2>
+    <p class="lab-sub">AC goes into the primary coil. The voltage across the secondary depends on the number of turns. The power stays the same.</p>
+    <div class="stage"><canvas id="trCanvas" aria-label="A transformer with a primary and a secondary coil on an iron core."></canvas></div>
+    <div class="slider-grid">
+      <div class="sl"><span>Primary turns Np: <b id="trNp">1000</b></span><input type="range" id="trNps" min="50" max="1000" step="50" value="1000" aria-label="Primary turns" /></div>
+      <div class="sl"><span>Secondary turns Ns: <b id="trNs">50</b></span><input type="range" id="trNss" min="50" max="2000" step="50" value="50" aria-label="Secondary turns" /></div>
+      <div class="sl"><span>Primary voltage Vp: <b id="trVp">240 V</b></span><input type="range" id="trVps" min="10" max="400" step="10" value="240" aria-label="Primary voltage in volts" /></div>
+      <div class="sl"><span>Power: <b id="trP">100 W</b></span><input type="range" id="trPs" min="10" max="1000" step="10" value="100" aria-label="Power in watts" /></div>
+    </div>
+    <div class="preset-row">
+      <button class="preset-btn" type="button" data-np="1000" data-ns="50" data-vp="240">Door bell (240 V → 12 V)</button>
+      <button class="preset-btn" type="button" data-np="100" data-ns="2000" data-vp="110">Step up (110 V → 2200 V)</button>
+    </div>
+    <div class="result-box" id="trResult" aria-live="polite"></div>
+    <div class="note-box" id="trNote" aria-live="polite"></div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">3 · Why transmit at high voltage?</h2>
+    <p class="lab-sub">A power station sends 100 kW through a line of 5 Ω. Raise the voltage with a step-up transformer and see how the heat loss in the wire changes.</p>
+    <div class="slider-grid">
+      <div class="sl"><span>Transmission voltage: <b id="txV">11 kV</b></span><input type="range" id="txVs" min="1" max="220" step="1" value="11" aria-label="Transmission voltage in kilovolt" /></div>
+    </div>
+    <div class="preset-row">
+      <button class="preset-btn" type="button" data-v="1">1 kV</button>
+      <button class="preset-btn" type="button" data-v="11">11 kV (generated)</button>
+      <button class="preset-btn" type="button" data-v="110">110 kV</button>
+      <button class="preset-btn" type="button" data-v="220">220 kV</button>
+    </div>
+    <div class="result-box" id="txResult" aria-live="polite"></div>
+    <div style="margin-top:12px;height:18px;border-radius:9px;background:var(--c-cream-dim);overflow:hidden"><div id="txBar" style="height:100%;width:0;background:#f43f5e;transition:width .25s"></div></div>
+    <div class="note-box" id="txNote" aria-live="polite"></div>
+  </div>
+  <div class="concept-grid">
+    <div class="concept-card reveal"><h4>Electromagnetic induction</h4><p>Whenever the magnetic flux linked with a closed coil changes, an emf is induced and a current flows. No change, no current. More turns, a stronger magnet or faster motion give more emf.</p><span class="formula">change in flux → induced emf</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>AC and DC</h4><p>DC flows in one direction only (cell, mobile phone). AC changes its direction again and again (home supply, mixie, grinder).</p><span class="formula">Cell → DC · Generator → AC</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Generator</h4><p>A generator changes mechanical energy into electric energy by electromagnetic induction. An AC generator uses slip rings. A DC generator uses a split ring commutator.</p><span class="formula">mechanical → electrical</span></div>
+    <div class="concept-card reveal"><h4>Transformer</h4><p>It works on mutual induction and changes AC voltage without changing the power. A step-up transformer has more turns in the secondary. A step-down has fewer.</p><span class="formula">Vs/Vp = Ns/Np · VpIp = VsIs</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Power transmission</h4><p>Raising the voltage lowers the current, and the heat loss I²R falls. Electricity is made at 11 kV, stepped up for the lines, stepped down near the town and reaches homes at 230 V.</p><span class="formula">11 kV ↑ 220 kV … ↓ 230 V</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Household wiring</h4><p>Wires: red is phase, black is neutral and green is earth. Appliances are connected in parallel. A switch is connected in series with the phase wire. The first parts are the fuse, main switch, ELCB and MCB board.</p><span class="formula">red phase · black neutral · green earth</span></div>
+    <div class="concept-card reveal"><h4>Safety devices</h4><p>A fuse wire (low melting point, in series) melts on too much current. An MCB trips and can be switched on again. An ELCB or RCCB cuts the supply on a current leak. An earth pin carries a fault current to the ground.</p><span class="formula">fuse: heating effect</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Overload and short circuit</h4><p>Too many or too powerful appliances on one line cause overloading. Touching phase and neutral wires causes a short circuit. Both give a huge current and can start a fire.</p><span class="formula">I = P ÷ V</span></div>
+  </div>
+</div>
+
+<section class="section-tight" id="resourcesSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">RESOURCES</span>
+      <h2>Practice with past questions</h2>
+      <p>Previous year questions for this chapter — download and practice offline.</p>
+    </div>
+    <div class="resource-grid" id="resourceGrid" data-chapter="electromagnetic-induction"></div>
+  </div>
+</section>
+
+<section class="section-tight" id="quizSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">PRACTICE</span>
+      <h2>Check your understanding</h2>
+      <p>Ten quick questions.</p>
+    </div>
+    <div class="game-shell reveal" id="quizShell" style="margin:0;"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="footer-logo" width="77" height="34" />
+        </div>
+        <div class="footer-slogan">learn science in a fun and easy way — don't memorise it.</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Science Pro. All rights reserved.</span>
+      <span>Built for curious students, classes 5–12.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/social.js" defer></script>
+<script src="js/chapter-resources.js" defer></script>
+<script src="js/electromagnetic-induction.js" defer></script>
+</body>
+</html>

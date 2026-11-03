@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Magnetic Effect of Electric Current — Class 10 Physics — Science Pro</title>
+<meta name="description" content="See how a current makes a magnet, build a solenoid and use Fleming's rule to find the force on a wire." />
+<link rel="icon" href="assets/logo-transparent.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts never block first paint: preload warms the cache, the stylesheet
+     itself is tagged media="print" so the browser doesn't wait on it to
+     render, then js/main.js flips it to media="all" the instant it's
+     ready. See PERFORMANCE.md. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" media="print" id="webfontsLink" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/lab.css" />
+<link rel="prefetch" href="subject.html?class=10&amp;subject=physics" />
+<style>
+  :root{ --c-chapter-accent: var(--c-physics); }
+  .lab-gap{ height:28px; }
+  .concept-grid{ margin-top:28px; }
+  canvas{ display:block; width:100%; }
+  .preset-btn:hover,.preset-btn.active{border-color:#0288D1;color:#0277BD;background:rgba(79,195,247,.14)}
+  .sl b{color:#0277BD}.sl input{accent-color:#0288D1}
+  .tools .go{background:#0288D1;border-color:#0288D1}.tools .go:hover{background:#0277BD}
+  .result-box .line.found{color:#0277BD;background:rgba(79,195,247,.2)}
+  .eq-box{background:rgba(79,195,247,.12);border-left-color:#0288D1}.eq-title{color:#0277BD}
+  .note-box{margin-top:14px;padding:12px 16px;border-radius:var(--radius-sm);background:rgba(79,195,247,.14);border-left:4px solid var(--c-physics);font-weight:600;font-size:.92rem;line-height:1.5}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+  .tab{font-family:var(--f-mono);font-size:.78rem;padding:10px 14px;min-height:44px;border-radius:var(--radius-pill);border:1.5px solid var(--c-cream-dim);background:#fff;color:var(--c-ink-soft);cursor:pointer}
+  .tab.on{border-color:#0288D1;background:#0288D1;color:#fff}
+  .stepper{display:flex;align-items:center;gap:6px}
+  .stepper button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--c-cream-dim);background:#fff;font-size:1.2rem;font-weight:700;cursor:pointer;color:#0277BD}
+  .stepper output{min-width:34px;text-align:center;font-family:var(--f-mono);font-weight:600}
+  .answer-pill{display:inline-block;padding:8px 16px;border-radius:var(--radius-pill);background:var(--c-navy);color:#fff;font-family:var(--f-mono);font-weight:600;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="site-header is-dark">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="brand-logo" width="73" height="32" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="classes.html">Classes</a>
+    </nav>
+</div>
+</header>
+
+<section class="page-hero" style="padding-bottom:80px;">
+  <div class="container">
+    <div class="crumb" style="color:rgba(250,247,241,.6); margin-bottom:14px;">
+      <a href="classes.html">Classes</a><span class="sep">/</span>
+      <a href="class10.html">Class 10</a><span class="sep">/</span>
+      <a href="subject.html?class=10&subject=physics">Physics</a><span class="sep">/</span>
+      <span>Magnetic Effect of Electric Current</span>
+    </div>
+    <span class="eyebrow">CHAPTER 4 · PHYSICS</span>
+    <h1>Magnetic Effect of Electric Current</h1>
+    <p>Turn a current on and watch compasses move. Build a solenoid and use Fleming's left-hand rule to find the direction of force.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="lab-card reveal">
+    <h2 class="lab-title">1 · Current makes a magnet</h2>
+    <p class="lab-sub">Switch the current on and see the compass needles turn around the wire. Reverse the current and the field reverses. Hold your right thumb along the current and your curled fingers show the field.</p>
+    <div class="stage"><canvas id="wrCanvas" aria-label="A straight wire seen from above with compass needles around it."></canvas></div>
+    <div class="slider-grid">
+      <div class="sl"><span>Current: <b id="wrI">3 A</b></span><input type="range" id="wrIs" min="0" max="10" step="1" value="3" aria-label="Current in amperes" /></div>
+    </div>
+    <div class="preset-row">
+      <button class="preset-btn" type="button" id="wrDir">Reverse current</button>
+    </div>
+    <div class="result-box" id="wrResult" aria-live="polite"></div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">2 · Solenoid</h2>
+    <p class="lab-sub">A solenoid acts like a bar magnet. Look at the current at each end: clockwise is the south pole, anticlockwise is the north pole.</p>
+    <div class="stage"><canvas id="slCanvas" aria-label="A solenoid with north and south poles."></canvas></div>
+    <div class="slider-grid">
+      <div class="sl"><span>Turns: <b id="slN">10</b></span><input type="range" id="slNs" min="4" max="16" step="2" value="10" aria-label="Number of turns" /></div>
+      <div class="sl"><span>Current: <b id="slI">2 A</b></span><input type="range" id="slIs" min="1" max="5" step="1" value="2" aria-label="Current in amperes" /></div>
+    </div>
+    <div class="preset-row">
+      <button class="preset-btn" type="button" id="slCore">Soft iron core: OFF</button>
+      <button class="preset-btn" type="button" id="slDir">Reverse current</button>
+    </div>
+    <div class="result-box" id="slResult" aria-live="polite"></div>
+    <div class="note-box" id="slNote" aria-live="polite"></div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">3 · Force on a wire and the motor</h2>
+    <p class="lab-sub">Fleming's left-hand rule: First finger = Field, seCond finger = Current, thuMb = Motion (F-C-M). Choose the field and the current and read the direction of force.</p>
+    <div class="stage"><canvas id="flCanvas" aria-label="A wire in a magnetic field with the force direction shown."></canvas></div>
+    <div class="preset-row">
+      <button class="preset-btn" type="button" id="flField">Field: North on top</button>
+      <button class="preset-btn" type="button" id="flCur">Current: into the page</button>
+    </div>
+    <div class="slider-grid">
+      <div class="sl"><span>Current: <b id="flI">2 A</b></span><input type="range" id="flIs" min="1" max="5" step="1" value="2" aria-label="Current" /></div>
+    </div>
+    <div class="result-box" id="flResult" aria-live="polite"></div>
+  </div>
+  <div class="concept-grid">
+    <div class="concept-card reveal"><h4>Oersted's experiment</h4><p>A current in a wire deflects a nearby compass needle. So a current produces a magnetic field around the wire. Reverse the current and the needle turns the other way.</p><span class="formula">current → magnetic field</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Right-hand thumb rule</h4><p>Hold the wire in your right hand with the thumb along the current. The curled fingers point along the field lines.</p><span class="formula">thumb: current · fingers: field</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Solenoid</h4><p>A coil of many turns behaves like a bar magnet. The end where the current is anticlockwise is the north pole. Clockwise is the south pole.</p><span class="formula">anticlockwise N · clockwise S</span></div>
+    <div class="concept-card reveal"><h4>Stronger electromagnet</h4><p>Increase the number of turns per unit length, increase the current, or put a soft iron core inside. Soft iron loses its magnetism when the current stops.</p><span class="formula">more turns · more current · iron core</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Force on a conductor</h4><p>A current-carrying conductor in a magnetic field feels a force. It is largest when the wire is at right angles to the field. Reverse the current or the field and the force reverses.</p><span class="formula">F-C-M: Field, Current, Motion</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Electric motor</h4><p>A motor changes electric energy into mechanical energy. The forces on the two sides of the coil are opposite, so the coil turns. A split-ring commutator reverses the current every half turn, so the coil keeps turning one way.</p><span class="formula">electrical → mechanical</span></div>
+    <div class="concept-card reveal"><h4>Loudspeaker</h4><p>A moving-coil loudspeaker has a coil in a magnetic field. The changing current from the signal moves the coil and the cone, and this makes sound.</p><span class="formula">varying current → vibrating cone</span></div>
+  </div>
+</div>
+
+<section class="section-tight" id="resourcesSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">RESOURCES</span>
+      <h2>Practice with past questions</h2>
+      <p>Previous year questions for this chapter — download and practice offline.</p>
+    </div>
+    <div class="resource-grid" id="resourceGrid" data-chapter="magnetic-effect"></div>
+  </div>
+</section>
+
+<section class="section-tight" id="quizSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">PRACTICE</span>
+      <h2>Check your understanding</h2>
+      <p>Ten quick questions.</p>
+    </div>
+    <div class="game-shell reveal" id="quizShell" style="margin:0;"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="footer-logo" width="77" height="34" />
+        </div>
+        <div class="footer-slogan">learn science in a fun and easy way — don't memorise it.</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Science Pro. All rights reserved.</span>
+      <span>Built for curious students, classes 5–12.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/social.js" defer></script>
+<script src="js/chapter-resources.js" defer></script>
+<script src="js/magnetic-effect.js" defer></script>
+</body>
+</html>

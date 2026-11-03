@@ -56,7 +56,7 @@ const SITE_DATA = {
      what to list and where to link — it does not render the topic
      itself. Topics with status "soon" show as locked cards.        */
   topics: {
-    physics: [
+        physics: [
       {
         id: "sound-waves",
         title: "Sound Waves",
@@ -69,23 +69,49 @@ const SITE_DATA = {
         id: "lenses",
         title: "Lenses",
         tag: "Chapter 2",
-        desc: "Drag a candle along the principal axis of a convex lens and see where the image forms.",
+        desc: "Move an object in front of a lens and see where the image forms, how big it is and whether it is real or virtual.",
         status: "live",
         page: "lenses.html",
       },
       {
-        id: "light-reflection",
-        title: "Reflection of Light",
-        tag: "Chapter 2",
-        desc: "Coming soon.",
-        status: "soon",
+        id: "colours-vision",
+        title: "The World of Colours and Vision",
+        tag: "Chapter 3",
+        desc: "Mix red, green and blue lights, see objects in coloured light, split white light with a prism and fix eye defects with lenses.",
+        status: "live",
+        page: "colours-vision.html",
       },
       {
-        id: "electricity",
-        title: "Electricity",
-        tag: "Chapter 3",
-        desc: "Coming soon.",
-        status: "soon",
+        id: "magnetic-effect",
+        title: "Magnetic Effect of Electric Current",
+        tag: "Chapter 4",
+        desc: "See compass needles turn around a wire, build a solenoid and use Fleming's left-hand rule to find the force on a wire.",
+        status: "live",
+        page: "magnetic-effect.html",
+      },
+      {
+        id: "electric-energy",
+        title: "Electric Energy: Consumption and Conservation",
+        tag: "Chapter 5",
+        desc: "Heat a coil with Joule's law and work out a real Kerala electricity bill for your home appliances.",
+        status: "live",
+        page: "electric-energy.html",
+      },
+      {
+        id: "electromagnetic-induction",
+        title: "Electromagnetic Induction in Daily Life",
+        tag: "Chapter 6",
+        desc: "Move a magnet through a coil, use a transformer and see why power is sent at high voltage.",
+        status: "live",
+        page: "electromagnetic-induction.html",
+      },
+      {
+        id: "mechanical-advantage",
+        title: "Mechanical Advantage in Action",
+        tag: "Chapter 7",
+        desc: "Balance levers, count pulley ropes and roll loads up inclined planes to find the mechanical advantage.",
+        status: "live",
+        page: "mechanical-advantage.html",
       },
     ],
     chemistry: [

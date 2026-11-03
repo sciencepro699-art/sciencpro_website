@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Mechanical Advantage in Action — Class 10 Physics — Science Pro</title>
+<meta name="description" content="Balance a lever, then try pulleys, an inclined plane and a wheel and axle to see how simple machines reduce the effort." />
+<link rel="icon" href="assets/logo-transparent.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts never block first paint: preload warms the cache, the stylesheet
+     itself is tagged media="print" so the browser doesn't wait on it to
+     render, then js/main.js flips it to media="all" the instant it's
+     ready. See PERFORMANCE.md. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" media="print" id="webfontsLink" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/lab.css" />
+<link rel="prefetch" href="subject.html?class=10&amp;subject=physics" />
+<style>
+  :root{ --c-chapter-accent: var(--c-physics); }
+  .lab-gap{ height:28px; }
+  .concept-grid{ margin-top:28px; }
+  canvas{ display:block; width:100%; }
+  .preset-btn:hover,.preset-btn.active{border-color:#0288D1;color:#0277BD;background:rgba(79,195,247,.14)}
+  .sl b{color:#0277BD}.sl input{accent-color:#0288D1}
+  .tools .go{background:#0288D1;border-color:#0288D1}.tools .go:hover{background:#0277BD}
+  .result-box .line.found{color:#0277BD;background:rgba(79,195,247,.2)}
+  .eq-box{background:rgba(79,195,247,.12);border-left-color:#0288D1}.eq-title{color:#0277BD}
+  .note-box{margin-top:14px;padding:12px 16px;border-radius:var(--radius-sm);background:rgba(79,195,247,.14);border-left:4px solid var(--c-physics);font-weight:600;font-size:.92rem;line-height:1.5}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+  .tab{font-family:var(--f-mono);font-size:.78rem;padding:10px 14px;min-height:44px;border-radius:var(--radius-pill);border:1.5px solid var(--c-cream-dim);background:#fff;color:var(--c-ink-soft);cursor:pointer}
+  .tab.on{border-color:#0288D1;background:#0288D1;color:#fff}
+  .stepper{display:flex;align-items:center;gap:6px}
+  .stepper button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--c-cream-dim);background:#fff;font-size:1.2rem;font-weight:700;cursor:pointer;color:#0277BD}
+  .stepper output{min-width:34px;text-align:center;font-family:var(--f-mono);font-weight:600}
+  .answer-pill{display:inline-block;padding:8px 16px;border-radius:var(--radius-pill);background:var(--c-navy);color:#fff;font-family:var(--f-mono);font-weight:600;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="site-header is-dark">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="brand-logo" width="73" height="32" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="classes.html">Classes</a>
+    </nav>
+</div>
+</header>
+
+<section class="page-hero" style="padding-bottom:80px;">
+  <div class="container">
+    <div class="crumb" style="color:rgba(250,247,241,.6); margin-bottom:14px;">
+      <a href="classes.html">Classes</a><span class="sep">/</span>
+      <a href="class10.html">Class 10</a><span class="sep">/</span>
+      <a href="subject.html?class=10&subject=physics">Physics</a><span class="sep">/</span>
+      <span>Mechanical Advantage in Action</span>
+    </div>
+    <span class="eyebrow">CHAPTER 7 · PHYSICS</span>
+    <h1>Mechanical Advantage in Action</h1>
+    <p>Balance a lever and see how its arms change the effort. Then try pulleys, a slope and a wheel and axle. A machine saves effort, but never work.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="lab-card reveal">
+    <h2 class="lab-title">1 · The lever</h2>
+    <p class="lab-sub">Choose a type of lever. Set the load and the two arms. Then change the effort and watch the lever tilt. It balances when load × load arm = effort × effort arm.</p>
+    <div class="tabs" id="lvTabs" role="group" aria-label="Order of lever">
+      <button type="button" class="tab on" data-t="1">First order</button>
+      <button type="button" class="tab" data-t="2">Second order</button>
+      <button type="button" class="tab" data-t="3">Third order</button>
+    </div>
+    <div class="stage"><canvas id="lvCanvas" aria-label="A lever with a load on one side and an effort on the other, tilting according to the turning effect of each."></canvas></div>
+    <div class="slider-grid">
+      <div class="sl"><span>Load L: <b id="lvL">60 N</b></span><input type="range" id="lvLs" min="10" max="100" step="5" value="60" aria-label="Load in newton" /></div>
+      <div class="sl"><span>Load arm: <b id="lvLA">20 cm</b></span><input type="range" id="lvLAs" min="5" max="60" step="5" value="20" aria-label="Load arm in centimetre" /></div>
+      <div class="sl"><span>Effort arm: <b id="lvEA">40 cm</b></span><input type="range" id="lvEAs" min="5" max="60" step="5" value="40" aria-label="Effort arm in centimetre" /></div>
+      <div class="sl"><span>Effort you apply E: <b id="lvE">30 N</b></span><input type="range" id="lvEs" min="0" max="300" step="1" value="30" aria-label="Effort in newton" /></div>
+    </div>
+    <div class="tools"><button class="preset-btn go" type="button" id="lvBal">Balance it</button></div>
+    <div class="result-box" id="lvResult" aria-live="polite"></div>
+    <div class="note-box" id="lvNote" aria-live="polite"></div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">2 · More simple machines</h2>
+    <p class="lab-sub">Pick a machine. See how much effort it needs and how far you must move. The work is always the same.</p>
+    <div class="tabs" id="mcTabs" role="group" aria-label="Simple machine">
+      <button type="button" class="tab on" data-t="pulley">Pulleys</button>
+      <button type="button" class="tab" data-t="ramp">Inclined plane</button>
+      <button type="button" class="tab" data-t="wheel">Wheel and axle</button>
+    </div>
+    <div class="stage"><canvas id="mcCanvas" aria-label="Diagram of the selected simple machine."></canvas></div>
+    <div id="pPanel">
+      <div class="slider-grid">
+        <div class="sl"><span>Rope segments holding the load: <b id="pN">4</b></span><input type="range" id="pNs" min="1" max="8" step="1" value="4" aria-label="Number of rope segments" /></div>
+        <div class="sl"><span>Load: <b id="pL">600 N</b></span><input type="range" id="pLs" min="100" max="1000" step="50" value="600" aria-label="Load in newton" /></div>
+        <div class="sl"><span>Load raised: <b id="pH">2 m</b></span><input type="range" id="pHs" min="1" max="5" step="1" value="2" aria-label="Height the load is raised in metre" /></div>
+      </div>
+      <div class="preset-row">
+        <button class="preset-btn" type="button" data-n="1">Fixed pulley</button>
+        <button class="preset-btn" type="button" data-n="2">1 movable pulley</button>
+        <button class="preset-btn" type="button" data-n="4">2 movable pulleys</button>
+        <button class="preset-btn" type="button" data-n="8">3 movable pulleys</button>
+      </div>
+    </div>
+    <div id="rPanel" hidden>
+      <div class="slider-grid">
+        <div class="sl"><span>Height h: <b id="rH">2 m</b></span><input type="range" id="rHs" min="1" max="4" step="0.5" value="2" aria-label="Height in metre" /></div>
+        <div class="sl"><span>Length of the slope l: <b id="rLn">8 m</b></span><input type="range" id="rLs" min="2" max="12" step="1" value="8" aria-label="Length of the slope in metre" /></div>
+        <div class="sl"><span>Load: <b id="rW">600 N</b></span><input type="range" id="rWs" min="100" max="1000" step="50" value="600" aria-label="Load in newton" /></div>
+      </div>
+    </div>
+    <div id="wPanel" hidden>
+      <div class="slider-grid">
+        <div class="sl"><span>Wheel radius R: <b id="wR">30 cm</b></span><input type="range" id="wRs" min="10" max="50" step="5" value="30" aria-label="Wheel radius in centimetre" /></div>
+        <div class="sl"><span>Axle radius r: <b id="wr">5 cm</b></span><input type="range" id="wrs" min="2" max="10" step="1" value="5" aria-label="Axle radius in centimetre" /></div>
+        <div class="sl"><span>Load: <b id="wL">600 N</b></span><input type="range" id="wLs" min="100" max="1000" step="50" value="600" aria-label="Load in newton" /></div>
+      </div>
+    </div>
+    <div class="result-box" id="mcResult" aria-live="polite"></div>
+    <div class="note-box" id="mcNote" aria-live="polite"></div>
+  </div>
+  <div class="concept-grid">
+    <div class="concept-card reveal"><h4>Mechanical advantage</h4><p>How many times the load is the effort you would need without the machine. It is only a ratio, so it has no unit.</p><span class="formula">MA = Load ÷ Effort</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Principle of a lever</h4><p>A lever balances when the turning effects on both sides are equal. A longer effort arm needs less effort.</p><span class="formula">L × LA = E × EA</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Three orders of levers</h4><p>1st: fulcrum in the middle (scissors, seesaw). 2nd: load in the middle, so MA is always more than 1 (nutcracker, wheelbarrow). 3rd: effort in the middle, so MA is always less than 1 (tongs, forceps).</p><span class="formula">MA of a lever = EA ÷ LA</span></div>
+    <div class="concept-card reveal"><h4>Pulleys</h4><p>A fixed pulley only changes the direction (MA = 1). A movable pulley gives MA = 2. With n movable pulleys MA = 2ⁿ. In a block system MA = the number of rope segments holding the load.</p><span class="formula">n movable pulleys: MA = 2ⁿ</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>No gain in work</h4><p>A machine lets you use less effort, but you must move through a longer distance. Work done by the effort equals work done on the load.</p><span class="formula">E × s = L × h</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Inclined plane, wedge, screw</h4><p>A longer, gentler slope needs less effort. A wedge is a double slope. In a screw, the length of one thread divided by the pitch gives the MA.</p><span class="formula">MA = length ÷ height</span></div>
+    <div class="concept-card reveal"><h4>Wheel and axle</h4><p>The effort is applied on the big wheel and the load is on the small axle. A bigger wheel gives a bigger MA.</p><span class="formula">MA = R ÷ r</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Gears</h4><p>Small toothed wheel driven by a big one gives more speed. For climbing a hill the engine is joined to a big toothed wheel: more turning force, less speed.</p><span class="formula">Big gear → force, small gear → speed</span></div>
+  </div>
+</div>
+
+<section class="section-tight" id="resourcesSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">RESOURCES</span>
+      <h2>Practice with past questions</h2>
+      <p>Previous year questions for this chapter — download and practice offline.</p>
+    </div>
+    <div class="resource-grid" id="resourceGrid" data-chapter="mechanical-advantage"></div>
+  </div>
+</section>
+
+<section class="section-tight" id="quizSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">PRACTICE</span>
+      <h2>Check your understanding</h2>
+      <p>Ten quick questions.</p>
+    </div>
+    <div class="game-shell reveal" id="quizShell" style="margin:0;"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="footer-logo" width="77" height="34" />
+        </div>
+        <div class="footer-slogan">learn science in a fun and easy way — don't memorise it.</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Science Pro. All rights reserved.</span>
+      <span>Built for curious students, classes 5–12.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/social.js" defer></script>
+<script src="js/chapter-resources.js" defer></script>
+<script src="js/mechanical-advantage.js" defer></script>
+</body>
+</html>

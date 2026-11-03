@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Electric Energy — Class 10 Physics — Science Pro</title>
+<meta name="description" content="See how current, resistance and time decide the heat from a heater, then work out the units and bill for a home." />
+<link rel="icon" href="assets/logo-transparent.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts never block first paint: preload warms the cache, the stylesheet
+     itself is tagged media="print" so the browser doesn't wait on it to
+     render, then js/main.js flips it to media="all" the instant it's
+     ready. See PERFORMANCE.md. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" media="print" id="webfontsLink" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/lab.css" />
+<link rel="prefetch" href="subject.html?class=10&amp;subject=physics" />
+<style>
+  :root{ --c-chapter-accent: var(--c-physics); }
+  .lab-gap{ height:28px; }
+  .concept-grid{ margin-top:28px; }
+  canvas{ display:block; width:100%; }
+  .preset-btn:hover,.preset-btn.active{border-color:#0288D1;color:#0277BD;background:rgba(79,195,247,.14)}
+  .sl b{color:#0277BD}.sl input{accent-color:#0288D1}
+  .tools .go{background:#0288D1;border-color:#0288D1}.tools .go:hover{background:#0277BD}
+  .result-box .line.found{color:#0277BD;background:rgba(79,195,247,.2)}
+  .eq-box{background:rgba(79,195,247,.12);border-left-color:#0288D1}.eq-title{color:#0277BD}
+  .note-box{margin-top:14px;padding:12px 16px;border-radius:var(--radius-sm);background:rgba(79,195,247,.14);border-left:4px solid var(--c-physics);font-weight:600;font-size:.92rem;line-height:1.5}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+  .tab{font-family:var(--f-mono);font-size:.78rem;padding:10px 14px;min-height:44px;border-radius:var(--radius-pill);border:1.5px solid var(--c-cream-dim);background:#fff;color:var(--c-ink-soft);cursor:pointer}
+  .tab.on{border-color:#0288D1;background:#0288D1;color:#fff}
+  .stepper{display:flex;align-items:center;gap:6px}
+  .stepper button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--c-cream-dim);background:#fff;font-size:1.2rem;font-weight:700;cursor:pointer;color:#0277BD}
+  .stepper output{min-width:34px;text-align:center;font-family:var(--f-mono);font-weight:600}
+  .answer-pill{display:inline-block;padding:8px 16px;border-radius:var(--radius-pill);background:var(--c-navy);color:#fff;font-family:var(--f-mono);font-weight:600;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="site-header is-dark">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="brand-logo" width="73" height="32" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="classes.html">Classes</a>
+    </nav>
+</div>
+</header>
+
+<section class="page-hero" style="padding-bottom:80px;">
+  <div class="container">
+    <div class="crumb" style="color:rgba(250,247,241,.6); margin-bottom:14px;">
+      <a href="classes.html">Classes</a><span class="sep">/</span>
+      <a href="class10.html">Class 10</a><span class="sep">/</span>
+      <a href="subject.html?class=10&subject=physics">Physics</a><span class="sep">/</span>
+      <span>Electric Energy</span>
+    </div>
+    <span class="eyebrow">CHAPTER 5 · PHYSICS</span>
+    <h1>Electric Energy</h1>
+    <p>Change the voltage and the resistance and watch a heater coil heat up. Then switch appliances on and off and see the units and the bill.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="lab-card reveal">
+    <h2 class="lab-title">1 · Heat from a heater coil</h2>
+    <p class="lab-sub">A heating coil is connected to a supply. Change the voltage, the resistance and the time. Watch the coil glow as the power goes up.</p>
+    <div class="stage"><canvas id="jCanvas" aria-label="A heater coil that glows brighter as power increases, with bars for current, power and heat."></canvas></div>
+    <div class="slider-grid">
+      <div class="sl"><span>Voltage V: <b id="jV">230 V</b></span><input type="range" id="jVs" min="10" max="230" step="10" value="230" aria-label="Voltage in volts" /></div>
+      <div class="sl"><span>Resistance R: <b id="jR">50 Ω</b></span><input type="range" id="jRs" min="10" max="500" step="10" value="50" aria-label="Resistance in ohms" /></div>
+      <div class="sl"><span>Time t: <b id="jT">10 min</b></span><input type="range" id="jTs" min="1" max="60" step="1" value="10" aria-label="Time in minutes" /></div>
+    </div>
+    <div class="preset-row">
+      <button class="preset-btn" type="button" data-v="230" data-r="50">Heater (230 V, 50 Ω)</button>
+      <button class="preset-btn" type="button" data-v="230" data-r="100">Iron box (230 V, 100 Ω)</button>
+      <button class="preset-btn" type="button" data-v="230" data-r="500">Bulb (230 V, 500 Ω)</button>
+    </div>
+    <div class="result-box" id="jResult" aria-live="polite"></div>
+    <div class="note-box" id="jNote" aria-live="polite"></div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">2 · Your home electricity bill</h2>
+    <p class="lab-sub">Choose how many of each appliance you use and for how many hours a day. See the units used and an estimated bill.</p>
+    <div id="apps"></div>
+    <div class="preset-row">
+      <button class="preset-btn" type="button" id="aTypical">Typical home</button>
+      <button class="preset-btn" type="button" id="aSaver">Use a BLDC fan</button>
+    </div>
+    <div class="result-box" id="bResult" aria-live="polite"></div>
+    <div class="note-box" id="bNote" aria-live="polite"></div>
+  </div>
+  <div class="concept-grid">
+    <div class="concept-card reveal"><h4>Joule's law</h4><p>Heat produced in a wire grows with the square of the current, with the resistance and with the time. Double the current and the heat becomes 4 times.</p><span class="formula">H = I²Rt</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Electric power</h4><p>Power is the energy used in one second. Use the form that matches what you are given.</p><span class="formula">P = VI = I²R = V²/R</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>One unit of energy</h4><p>One unit is one kilowatt hour: a 1000 W appliance running for 1 hour. It is the unit used on your electricity bill.</p><span class="formula">1 kWh = 3.6 × 10⁶ J</span></div>
+    <div class="concept-card reveal"><h4>Why nichrome?</h4><p>A heating element needs a high resistivity, a high melting point and no rusting when red hot. Nichrome has all three.</p><span class="formula">R = ρ l / A</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Same voltage, different resistance</h4><p>At the same voltage a smaller resistance draws more current, so the power is more. A 60 W bulb has a smaller resistance than a 40 W bulb.</p><span class="formula">P = V²/R</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Saving energy</h4><p>Use LED lamps, BLDC fans and 5-star appliances. Run heavy appliances in the cheaper hours. Solar panels give electricity without pollution.</p><span class="formula">Energy saved = energy produced</span></div>
+  </div>
+</div>
+
+<section class="section-tight" id="resourcesSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">RESOURCES</span>
+      <h2>Practice with past questions</h2>
+      <p>Previous year questions for this chapter — download and practice offline.</p>
+    </div>
+    <div class="resource-grid" id="resourceGrid" data-chapter="electric-energy"></div>
+  </div>
+</section>
+
+<section class="section-tight" id="quizSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">PRACTICE</span>
+      <h2>Check your understanding</h2>
+      <p>Ten quick questions.</p>
+    </div>
+    <div class="game-shell reveal" id="quizShell" style="margin:0;"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="footer-logo" width="77" height="34" />
+        </div>
+        <div class="footer-slogan">learn science in a fun and easy way — don't memorise it.</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Science Pro. All rights reserved.</span>
+      <span>Built for curious students, classes 5–12.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/social.js" defer></script>
+<script src="js/chapter-resources.js" defer></script>
+<script src="js/electric-energy.js" defer></script>
+</body>
+</html>

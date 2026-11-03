@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Colours and Vision — Class 10 Physics — Science Pro</title>
+<meta name="description" content="Mix coloured lights, split light with a prism, and see how lenses correct short and long sight." />
+<link rel="icon" href="assets/logo-transparent.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts never block first paint: preload warms the cache, the stylesheet
+     itself is tagged media="print" so the browser doesn't wait on it to
+     render, then js/main.js flips it to media="all" the instant it's
+     ready. See PERFORMANCE.md. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" media="print" id="webfontsLink" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/lab.css" />
+<link rel="prefetch" href="subject.html?class=10&amp;subject=physics" />
+<style>
+  :root{ --c-chapter-accent: var(--c-physics); }
+  .lab-gap{ height:28px; }
+  .concept-grid{ margin-top:28px; }
+  canvas{ display:block; width:100%; }
+  .preset-btn:hover,.preset-btn.active{border-color:#0288D1;color:#0277BD;background:rgba(79,195,247,.14)}
+  .sl b{color:#0277BD}.sl input{accent-color:#0288D1}
+  .tools .go{background:#0288D1;border-color:#0288D1}.tools .go:hover{background:#0277BD}
+  .result-box .line.found{color:#0277BD;background:rgba(79,195,247,.2)}
+  .eq-box{background:rgba(79,195,247,.12);border-left-color:#0288D1}.eq-title{color:#0277BD}
+  .note-box{margin-top:14px;padding:12px 16px;border-radius:var(--radius-sm);background:rgba(79,195,247,.14);border-left:4px solid var(--c-physics);font-weight:600;font-size:.92rem;line-height:1.5}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+  .tab{font-family:var(--f-mono);font-size:.78rem;padding:10px 14px;min-height:44px;border-radius:var(--radius-pill);border:1.5px solid var(--c-cream-dim);background:#fff;color:var(--c-ink-soft);cursor:pointer}
+  .tab.on{border-color:#0288D1;background:#0288D1;color:#fff}
+  .stepper{display:flex;align-items:center;gap:6px}
+  .stepper button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--c-cream-dim);background:#fff;font-size:1.2rem;font-weight:700;cursor:pointer;color:#0277BD}
+  .stepper output{min-width:34px;text-align:center;font-family:var(--f-mono);font-weight:600}
+  .answer-pill{display:inline-block;padding:8px 16px;border-radius:var(--radius-pill);background:var(--c-navy);color:#fff;font-family:var(--f-mono);font-weight:600;font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="site-header is-dark">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="brand-logo" width="73" height="32" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="classes.html">Classes</a>
+    </nav>
+</div>
+</header>
+
+<section class="page-hero" style="padding-bottom:80px;">
+  <div class="container">
+    <div class="crumb" style="color:rgba(250,247,241,.6); margin-bottom:14px;">
+      <a href="classes.html">Classes</a><span class="sep">/</span>
+      <a href="class10.html">Class 10</a><span class="sep">/</span>
+      <a href="subject.html?class=10&subject=physics">Physics</a><span class="sep">/</span>
+      <span>Colours and Vision</span>
+    </div>
+    <span class="eyebrow">CHAPTER 3 · PHYSICS</span>
+    <h1>Colours and Vision</h1>
+    <p>Mix red, green and blue lights, see objects in coloured light, split white light with a prism and fix the eye defects with lenses.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="lab-card reveal">
+    <h2 class="lab-title">1 · Mixing coloured lights</h2>
+    <p class="lab-sub">Switch the primary colours of light on and off. Red, green and blue together make white. Two primaries make a secondary colour.</p>
+    <div class="stage"><canvas id="mxCanvas" aria-label="Three overlapping circles of red, green and blue light on a dark screen."></canvas></div>
+    <div class="preset-row">
+      <button class="preset-btn" type="button" id="mxR" aria-pressed="true">Red: ON</button>
+      <button class="preset-btn" type="button" id="mxG" aria-pressed="true">Green: ON</button>
+      <button class="preset-btn" type="button" id="mxB" aria-pressed="true">Blue: ON</button>
+    </div>
+    <div class="result-box" id="mxResult" aria-live="polite"></div>
+    <div class="note-box" id="mxNote" aria-live="polite"></div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">2 · Objects in coloured light</h2>
+    <p class="lab-sub">An opaque object reflects only its own colour and absorbs the rest. Pick an object and a light and see what colour it looks.</p>
+    <div class="stage"><canvas id="obCanvas" aria-label="An object lit by a coloured light."></canvas></div>
+    <div class="slider-grid">
+      <div class="sl"><span>Object colour: <b id="obOn">Red</b></span><input type="range" id="obOs" min="0" max="7" step="1" value="1" aria-label="Object colour" /></div>
+      <div class="sl"><span>Light colour: <b id="obLn">White</b></span><input type="range" id="obLs" min="0" max="6" step="1" value="0" aria-label="Light colour" /></div>
+    </div>
+    <div class="result-box" id="obResult" aria-live="polite"></div>
+    <div class="note-box" id="obNote" aria-live="polite"></div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">3 · Prism and dispersion</h2>
+    <p class="lab-sub">A prism splits white light into seven colours. Red bends the least and violet bends the most.</p>
+    <div class="stage"><canvas id="pzCanvas" aria-label="White light entering a prism and splitting into a spectrum."></canvas></div>
+    <div class="slider-grid">
+      <div class="sl"><span>Angle of the prism: <b id="pzA">60°</b></span><input type="range" id="pzAs" min="30" max="70" step="5" value="60" aria-label="Angle of prism" /></div>
+    </div>
+    <div class="result-box" id="pzResult" aria-live="polite"></div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">4 · Defects of the eye</h2>
+    <p class="lab-sub">Choose the eye and the object distance, then try a corrective lens. The image must fall exactly on the retina to look sharp.</p>
+    <div class="stage"><canvas id="eyCanvas" aria-label="An eye with light rays focusing in front of, on or behind the retina."></canvas></div>
+    <div class="preset-row">
+      <button class="preset-btn" type="button" id="eyType">Eye: Normal</button>
+      <button class="preset-btn" type="button" id="eyDist">Object: Far away</button>
+      <button class="preset-btn" type="button" id="eyLens">Lens: None</button>
+    </div>
+    <div class="result-box" id="eyResult" aria-live="polite"></div>
+    <div class="note-box" id="eyNote" aria-live="polite"></div>
+  </div>
+  <div class="concept-grid">
+    <div class="concept-card reveal"><h4>Dispersion</h4><p>White light splits into VIBGYOR when it passes through a prism, because each colour bends by a different amount. Red bends least and has the longest wavelength. Violet bends most. A rainbow forms by dispersion in water drops.</p><span class="formula">V I B G Y O R</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Primary and secondary</h4><p>Primary colours of light are red, green and blue. Red + green = yellow. Green + blue = cyan. Red + blue = magenta. All three make white.</p><span class="formula">R + G + B = white</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Complementary colours</h4><p>Two colours that make white light when added are complementary: red and cyan, green and magenta, blue and yellow.</p><span class="formula">R + C = G + M = B + Y = white</span></div>
+    <div class="concept-card reveal"><h4>Scattering</h4><p>Particles of the air scatter light in all directions. Blue is scattered the most and red the least. So the sky is blue. At sunrise and sunset the light travels a long way through the air, the blue is scattered away and the Sun looks red.</p><span class="formula">blue scatters most · red least</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Tyndall effect</h4><p>The path of light becomes visible in a colloid, such as sunlight through mist, smoke or the branches of a wood. This is scattering by the particles of the medium.</p><span class="formula">visible beam in a colloid</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Myopia and hypermetropia</h4><p>Short-sightedness (myopia): far objects are blurred because the image forms in front of the retina. It is corrected with a concave lens. Long-sightedness (hypermetropia): near objects are blurred because the image forms behind the retina and the near point is more than 25 cm. It is corrected with a convex lens.</p><span class="formula">myopia: concave · hypermetropia: convex</span></div>
+    <div class="concept-card reveal"><h4>Persistence of vision</h4><p>An image stays in the eye for about 1/16 of a second after the object is gone. A Newton's colour disc spun fast looks white because the colours blend. A movie looks continuous for the same reason.</p><span class="formula">image stays ≈ 1/16 s</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Power of a lens</h4><p>The power of a lens is 1/f, with f in metres, measured in dioptre (D). A convex lens has a positive power and a concave lens has a negative power, so a prescription of −1 D is a concave lens for myopia.</p><span class="formula">P = 1 ÷ f</span></div>
+  </div>
+</div>
+
+<section class="section-tight" id="resourcesSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">RESOURCES</span>
+      <h2>Practice with past questions</h2>
+      <p>Previous year questions for this chapter — download and practice offline.</p>
+    </div>
+    <div class="resource-grid" id="resourceGrid" data-chapter="colours-vision"></div>
+  </div>
+</section>
+
+<section class="section-tight" id="quizSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">PRACTICE</span>
+      <h2>Check your understanding</h2>
+      <p>Ten quick questions.</p>
+    </div>
+    <div class="game-shell reveal" id="quizShell" style="margin:0;"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="footer-logo" width="77" height="34" />
+        </div>
+        <div class="footer-slogan">learn science in a fun and easy way — don't memorise it.</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Science Pro. All rights reserved.</span>
+      <span>Built for curious students, classes 5–12.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/social.js" defer></script>
+<script src="js/chapter-resources.js" defer></script>
+<script src="js/colours-vision.js" defer></script>
+</body>
+</html>
