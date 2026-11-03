@@ -268,15 +268,13 @@ const SITE_DATA = {
         page: "statistics.html",
       },
     ],
-    biology: [
-      {
-        id: "genetics",
-        title: "Genetics of Life",
-        tag: "Chapter 1",
-        desc: "Zoom from a whole cell down to a single gene, and see exactly how a DNA double helix is built.",
-        status: "live",
-        page: "genetics.html",
-      },
-    ],
+       biology: [
+  { id: "genetics", title: "Genetics of Life", tag: "Chapter 1", desc: "DNA, RNA, protein synthesis, Mendel's laws and sex determination.", status: "live", page: "genetics.html" },
+  { id: "paths-of-evolution", title: "Paths of Evolution", tag: "Chapter 2", desc: "Theories of evolution, human evolution and the nervous system.", status: "live", page: "paths-of-evolution.html" },
+  { id: "behind-sensations", title: "Behind Sensations", tag: "Chapter 3", desc: "Eye, ear, taste, smell and how the brain forms a sensation.", status: "live", page: "behind-sensations.html" },
+  { id: "chemoreception", title: "Chemoreception in Organisms", tag: "Chapter 4", desc: "Plant and animal hormones, glands, glucose, calcium and pheromones.", status: "live", page: "chemoreception.html" },
+  { id: "immunity-healthcare", title: "Immunity and Healthcare", tag: "Chapter 5", desc: "Defence of the body, vaccines, blood groups, diseases and medicines.", status: "live", page: "immunity-healthcare.html" },
+  { id: "biology-technology", title: "Biology and Technology", tag: "Chapter 6", desc: "Genetic engineering, CRISPR, DNA fingerprinting, AI and the environment.", status: "live", page: "biology-technology.html" }
+],
   },
 };
