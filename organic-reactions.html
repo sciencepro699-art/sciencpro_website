@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Reactions of Organic Compounds — Class 10 Chemistry — Science Pro</title>
+<meta name="description" content="Watch substitution, addition, combustion and cracking, build polymers and make esters." />
+<link rel="icon" href="assets/logo-transparent.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts never block first paint: preload warms the cache, the stylesheet
+     itself is tagged media="print" so the browser doesn't wait on it to
+     render, then js/main.js flips it to media="all" the instant it's
+     ready. See PERFORMANCE.md. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" media="print" id="webfontsLink" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/lab.css" />
+<link rel="prefetch" href="subject.html?class=10&amp;subject=chemistry" />
+<style>
+  :root{ --c-chapter-accent: var(--c-chemistry); }
+  .lab-gap{ height:28px; }
+  .concept-grid{ margin-top:28px; }
+  canvas{ display:block; width:100%; }
+  .preset-btn:hover,.preset-btn.active{border-color:#689F38;color:#33691E;background:rgba(156,204,60,.14)}
+  .sl b{color:#33691E}.sl input{accent-color:#689F38}
+  .tools .go{background:#689F38;border-color:#689F38}.tools .go:hover{background:#33691E}
+  .result-box .line.found{color:#33691E;background:rgba(156,204,60,.2)}
+  .eq-box{background:rgba(156,204,60,.12);border-left-color:#689F38}.eq-title{color:#33691E}
+  .note-box{margin-top:14px;padding:12px 16px;border-radius:var(--radius-sm);background:rgba(156,204,60,.14);border-left:4px solid var(--c-chemistry);font-weight:600;font-size:.92rem;line-height:1.5}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+  .tab{font-family:var(--f-mono);font-size:.78rem;padding:10px 14px;min-height:44px;border-radius:var(--radius-pill);border:1.5px solid var(--c-cream-dim);background:#fff;color:var(--c-ink-soft);cursor:pointer}
+  .tab.on{border-color:#689F38;background:#689F38;color:#fff}
+  .stepper{display:flex;align-items:center;gap:6px}
+  .stepper button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--c-cream-dim);background:#fff;font-size:1.2rem;font-weight:700;cursor:pointer;color:#33691E}
+  .stepper output{min-width:34px;text-align:center;font-family:var(--f-mono);font-weight:600}
+  .answer-pill{display:inline-block;padding:8px 16px;border-radius:var(--radius-pill);background:var(--c-navy);color:#fff;font-family:var(--f-mono);font-weight:600;font-size:.9rem}
+.preset-btn{min-width:44px}</style>
+</head>
+<body>
+<header class="site-header is-dark">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="brand-logo" width="73" height="32" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="classes.html">Classes</a>
+    </nav>
+</div>
+</header>
+
+<section class="page-hero" style="padding-bottom:80px;">
+  <div class="container">
+    <div class="crumb" style="color:rgba(250,247,241,.6); margin-bottom:14px;">
+      <a href="classes.html">Classes</a><span class="sep">/</span>
+      <a href="class10.html">Class 10</a><span class="sep">/</span>
+      <a href="subject.html?class=10&subject=chemistry">Chemistry</a><span class="sep">/</span>
+      <span>Reactions of Organic Compounds</span>
+    </div>
+    <span class="eyebrow">CHAPTER 2 · CHEMISTRY</span>
+    <h1>Reactions of Organic Compounds</h1>
+    <p>Watch organic reactions happen, build polymers and make fruity esters.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="lab-card reveal">
+    <h2 class="lab-title">1 · Watch a reaction happen</h2>
+    <p class="lab-sub">Pick a reaction, then drag the slider to turn the reactants into the products.</p>
+    <div class="stage"><canvas id="rxCanvas" aria-label="Reactant molecules turning into product molecules."></canvas></div>
+    <div class="preset-row">
+      <button class="preset-btn on" type="button" data-r="0">Substitution</button>
+      <button class="preset-btn" type="button" data-r="1">Addition</button>
+      <button class="preset-btn" type="button" data-r="2">Combustion</button>
+      <button class="preset-btn" type="button" data-r="3">Cracking</button>
+    </div>
+    <div class="slider-grid">
+      <div class="sl"><span>Reaction progress</span><input type="range" id="rxS" min="0" max="100" step="1" value="0" aria-label="Reaction progress" /></div>
+    </div>
+    <div class="result-box" id="rxResult" aria-live="polite"></div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">2 · Build a polymer</h2>
+    <p class="lab-sub">Choose a monomer and add more units. Tap Join to open the double bonds and link them into a chain.</p>
+    <div class="stage"><canvas id="pmCanvas" aria-label="Monomer units joining into a polymer chain."></canvas></div>
+    <div class="preset-row">
+      <button class="preset-btn on" type="button" data-m="0">Ethene</button>
+      <button class="preset-btn" type="button" data-m="1">Vinyl chloride</button>
+      <button class="preset-btn" type="button" data-m="2">Tetrafluoroethene</button>
+      <button class="preset-btn" type="button" data-m="3">Acrylonitrile</button>
+    </div>
+    <div class="slider-grid">
+      <div class="sl"><span>Number of monomers: <b id="pmN">3</b></span><input type="range" id="pmNs" min="1" max="5" step="1" value="3" aria-label="Number of monomers" /></div>
+    </div>
+    <div class="preset-row"><button class="preset-btn" type="button" id="pmJoin">Join</button></div>
+    <div class="result-box" id="pmResult" aria-live="polite"></div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">3 · Make an ester</h2>
+    <p class="lab-sub">An alcohol and a carboxylic acid react with conc. H₂SO₄ to give a sweet-smelling ester and water.</p>
+    <div class="stage"><canvas id="esCanvas" aria-label="An alcohol and an acid combining into an ester and water."></canvas></div>
+    <div class="preset-row">
+      <button class="preset-btn" type="button" id="esA">Alcohol: Ethanol</button>
+      <button class="preset-btn" type="button" id="esB">Acid: Ethanoic acid</button>
+    </div>
+    <div class="result-box" id="esResult" aria-live="polite"></div>
+  </div>
+  <div class="concept-grid">
+    <div class="concept-card reveal"><h4>Substitution</h4><p>One atom or group in a molecule is replaced by another. Methane and chlorine in sunlight give chloromethane and HCl.</p><span class="formula">CH₄ + Cl₂ → CH₃Cl + HCl</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Addition</h4><p>Unsaturated compounds (with a double or triple bond) add atoms across the bond and become saturated. Hydrogenation uses a nickel catalyst.</p><span class="formula">CH₂=CH₂ + H₂ → CH₃–CH₃</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Combustion and cracking</h4><p>Burning in air gives carbon dioxide, water and heat. Thermal cracking breaks a large hydrocarbon into smaller ones on heating.</p><span class="formula">C₃H₈ → CH₄ + C₂H₄</span></div>
+    <div class="concept-card reveal"><h4>Polymerisation</h4><p>Many small monomers join to make a polymer. Addition polymers: polythene, PVC, Teflon, Orlon, natural rubber (from isoprene). Condensation polymers: nylon 66, bakelite, polyester.</p><span class="formula">n CH₂=CH₂ → (CH₂–CH₂)ₙ</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Ethanol</h4><p>Made by fermentation of molasses. The wash has 8–10% ethanol. Rectified spirit is 95.6%. Absolute alcohol is 100%. Power alcohol is a petrol–ethanol blend. Denatured spirit is made unfit to drink.</p><span class="formula">C₂H₅OH</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Ethanoic acid</h4><p>A carboxylic acid with the group –COOH. Vinegar is a 5–8% solution of ethanoic acid in water.</p><span class="formula">CH₃COOH</span></div>
+    <div class="concept-card reveal"><h4>Esterification</h4><p>Alcohol + carboxylic acid → ester + water, in the presence of conc. H₂SO₄. Esters smell fruity and are used in fragrances and flavours.</p><span class="formula">acid + alcohol → ester + H₂O</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Soap</h4><p>Soaps are sodium or potassium salts of fatty acids. Glycerol is the by-product of soap making.</p><span class="formula">by-product: glycerol</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Medicines</h4><p>Analgesics relieve pain, antipyretics lower fever, antiseptics kill germs on skin and antibiotics fight bacteria. Paracetamol and aspirin are examples.</p><span class="formula">paracetamol · aspirin</span></div>
+  </div>
+</div>
+
+<section class="section-tight" id="resourcesSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">RESOURCES</span>
+      <h2>Practice with past questions</h2>
+      <p>Previous year questions for this chapter — download and practice offline.</p>
+    </div>
+    <div class="resource-grid" id="resourceGrid" data-chapter="organic-reactions"></div>
+  </div>
+</section>
+
+<section class="section-tight" id="quizSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">PRACTICE</span>
+      <h2>Check your understanding</h2>
+      <p>Ten quick questions.</p>
+    </div>
+    <div class="game-shell reveal" id="quizShell" style="margin:0;"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="footer-logo" width="77" height="34" />
+        </div>
+        <div class="footer-slogan">learn science in a fun and easy way — don't memorise it.</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Science Pro. All rights reserved.</span>
+      <span>Built for curious students, classes 5–12.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/social.js" defer></script>
+<script src="js/chapter-resources.js" defer></script>
+<script src="js/organic-reactions.js" defer></script>
+</body>
+</html>

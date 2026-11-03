@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Periodic Table and Electron Configuration — Class 10 Chemistry — Science Pro</title>
+<meta name="description" content="Fill electrons into subshells, find the block, period and group of any element from 1 to 36, and see how ionisation enthalpy changes." />
+<link rel="icon" href="assets/logo-transparent.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts never block first paint: preload warms the cache, the stylesheet
+     itself is tagged media="print" so the browser doesn't wait on it to
+     render, then js/main.js flips it to media="all" the instant it's
+     ready. See PERFORMANCE.md. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" media="print" id="webfontsLink" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/lab.css" />
+<link rel="prefetch" href="subject.html?class=10&amp;subject=chemistry" />
+<style>
+  :root{ --c-chapter-accent: var(--c-chemistry); }
+  .lab-gap{ height:28px; }
+  .concept-grid{ margin-top:28px; }
+  canvas{ display:block; width:100%; }
+  .preset-btn:hover,.preset-btn.active{border-color:#689F38;color:#33691E;background:rgba(156,204,60,.14)}
+  .sl b{color:#33691E}.sl input{accent-color:#689F38}
+  .tools .go{background:#689F38;border-color:#689F38}.tools .go:hover{background:#33691E}
+  .result-box .line.found{color:#33691E;background:rgba(156,204,60,.2)}
+  .eq-box{background:rgba(156,204,60,.12);border-left-color:#689F38}.eq-title{color:#33691E}
+  .note-box{margin-top:14px;padding:12px 16px;border-radius:var(--radius-sm);background:rgba(156,204,60,.14);border-left:4px solid var(--c-chemistry);font-weight:600;font-size:.92rem;line-height:1.5}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+  .tab{font-family:var(--f-mono);font-size:.78rem;padding:10px 14px;min-height:44px;border-radius:var(--radius-pill);border:1.5px solid var(--c-cream-dim);background:#fff;color:var(--c-ink-soft);cursor:pointer}
+  .tab.on{border-color:#689F38;background:#689F38;color:#fff}
+  .stepper{display:flex;align-items:center;gap:6px}
+  .stepper button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--c-cream-dim);background:#fff;font-size:1.2rem;font-weight:700;cursor:pointer;color:#33691E}
+  .stepper output{min-width:34px;text-align:center;font-family:var(--f-mono);font-weight:600}
+  .answer-pill{display:inline-block;padding:8px 16px;border-radius:var(--radius-pill);background:var(--c-navy);color:#fff;font-family:var(--f-mono);font-weight:600;font-size:.9rem}
+.preset-btn{min-width:44px}</style>
+</head>
+<body>
+<header class="site-header is-dark">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="brand-logo" width="73" height="32" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="classes.html">Classes</a>
+    </nav>
+</div>
+</header>
+
+<section class="page-hero" style="padding-bottom:80px;">
+  <div class="container">
+    <div class="crumb" style="color:rgba(250,247,241,.6); margin-bottom:14px;">
+      <a href="classes.html">Classes</a><span class="sep">/</span>
+      <a href="class10.html">Class 10</a><span class="sep">/</span>
+      <a href="subject.html?class=10&subject=chemistry">Chemistry</a><span class="sep">/</span>
+      <span>Periodic Table and Electron Configuration</span>
+    </div>
+    <span class="eyebrow">CHAPTER 3 · CHEMISTRY</span>
+    <h1>Periodic Table and Electron Configuration</h1>
+    <p>Pick an element and watch its electrons fill the subshells. Then find its block, period and group.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="lab-card reveal">
+    <h2 class="lab-title">1 · Fill the electrons</h2>
+    <p class="lab-sub">Choose an element. Its electrons fill the subshells from the lowest energy upwards. The numbers in brackets are (n + l).</p>
+    <div class="stage"><canvas id="ecCanvas" aria-label="Subshell boxes filled with electrons for the chosen element."></canvas></div>
+    <div class="slider-grid">
+      <div class="sl"><span>Atomic number: <b id="ecZ">11</b></span><input type="range" id="ecZs" min="1" max="36" step="1" value="11" aria-label="Atomic number" /></div>
+    </div>
+    <div class="preset-row">
+      <button class="preset-btn" type="button" id="ecDn" aria-label="Previous element">◀ Previous</button>
+      <button class="preset-btn" type="button" id="ecUp" aria-label="Next element">Next ▶</button>
+      <button class="preset-btn" type="button" data-z="24">Cr</button>
+      <button class="preset-btn" type="button" data-z="26">Fe</button>
+      <button class="preset-btn" type="button" data-z="29">Cu</button>
+    </div>
+    <div class="result-box" id="ecResult" aria-live="polite"></div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">2 · Shells, subshells and orbitals</h2>
+    <p class="lab-sub">Change the shell number n and see its subshells and orbitals.</p>
+    <div class="stage"><canvas id="shCanvas" aria-label="Subshells and orbitals in a shell."></canvas></div>
+    <div class="preset-row">
+      <button class="preset-btn" type="button" data-n="1">n = 1 (K)</button>
+      <button class="preset-btn" type="button" data-n="2">n = 2 (L)</button>
+      <button class="preset-btn" type="button" data-n="3">n = 3 (M)</button>
+      <button class="preset-btn" type="button" data-n="4">n = 4 (N)</button>
+    </div>
+    <div class="result-box" id="shResult" aria-live="polite"></div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">3 · Ionisation enthalpy</h2>
+    <p class="lab-sub">The energy needed to remove the outermost electron. See how it changes along a period and down a group.</p>
+    <div class="stage"><canvas id="ieCanvas" aria-label="Bar chart of ionisation enthalpy."></canvas></div>
+    <div class="preset-row">
+      <button class="preset-btn" type="button" id="ieP">Along period 2 →</button>
+      <button class="preset-btn" type="button" id="ieG">Down group 1 ↓</button>
+    </div>
+    <div class="result-box" id="ieResult" aria-live="polite"></div>
+  </div>
+  <div class="concept-grid">
+    <div class="concept-card reveal"><h4>Orbitals and quantum numbers</h4><p>An orbital is the region around the nucleus where an electron is most likely to be found. Quantum numbers describe it: n for the shell, l for the subshell and m for the orientation.</p><span class="formula">n = 1, 2, 3, 4 … (K, L, M, N)</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Subshells</h4><p>The value of l runs from 0 to n − 1. l = 0 is s, 1 is p, 2 is d and 3 is f. A subshell has 2l + 1 orbitals: s has 1, p has 3, d has 5 and f has 7.</p><span class="formula">s = 2 · p = 6 · d = 10 · f = 14 electrons</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Capacity</h4><p>A shell has n² orbitals and holds 2n² electrons. Each orbital holds at most 2 electrons.</p><span class="formula">orbitals n² · electrons 2n²</span></div>
+    <div class="concept-card reveal"><h4>The (n + l) rule</h4><p>Subshells fill in increasing order of (n + l). If two have the same value, the one with the smaller n fills first. So 4s fills before 3d.</p><span class="formula">1s 2s 2p 3s 3p 4s 3d 4p</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Writing the configuration</h4><p>Write each subshell with its electron count, for example sodium is 1s² 2s² 2p⁶ 3s¹. A short form uses the noble gas before it, so sodium is [Ne] 3s¹.</p><span class="formula">Na = [Ne] 3s¹</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Chromium and copper</h4><p>Half filled (d⁵) and completely filled (d¹⁰) d subshells are extra stable. So Cr is 3d⁵ 4s¹ and Cu is 3d¹⁰ 4s¹, not 3d⁴ 4s² or 3d⁹ 4s².</p><span class="formula">Cr: 3d⁵4s¹ · Cu: 3d¹⁰4s¹</span></div>
+    <div class="concept-card reveal"><h4>Block, period and group</h4><p>Block: the subshell that gets the last electron. Period: the highest shell number. Group: s block = outer electrons; p block = 10 + outer electrons; d block = (n−1)d electrons + ns electrons.</p><span class="formula">s: 1–2 · d: 3–12 · p: 13–18</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>s, p and d block elements</h4><p>s block elements give up electrons and show +1 or +2. p block elements show both positive and negative oxidation states. d block (transition) elements show variable oxidation states, like Fe²⁺ and Fe³⁺.</p><span class="formula">Fe²⁺ and Fe³⁺</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Ionisation enthalpy</h4><p>The minimum energy to remove the most loosely held electron from a gaseous atom. It decreases down a group and generally increases along a period.</p><span class="formula">down ↓ decreases · across → increases</span></div>
+  </div>
+</div>
+
+<section class="section-tight" id="resourcesSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">RESOURCES</span>
+      <h2>Practice with past questions</h2>
+      <p>Previous year questions for this chapter — download and practice offline.</p>
+    </div>
+    <div class="resource-grid" id="resourceGrid" data-chapter="periodic-table"></div>
+  </div>
+</section>
+
+<section class="section-tight" id="quizSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">PRACTICE</span>
+      <h2>Check your understanding</h2>
+      <p>Ten quick questions.</p>
+    </div>
+    <div class="game-shell reveal" id="quizShell" style="margin:0;"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="footer-logo" width="77" height="34" />
+        </div>
+        <div class="footer-slogan">learn science in a fun and easy way — don't memorise it.</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Science Pro. All rights reserved.</span>
+      <span>Built for curious students, classes 5–12.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/social.js" defer></script>
+<script src="js/chapter-resources.js" defer></script>
+<script src="js/periodic-table.js" defer></script>
+</body>
+</html>

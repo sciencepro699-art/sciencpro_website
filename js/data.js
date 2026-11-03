@@ -114,7 +114,7 @@ const SITE_DATA = {
         page: "mechanical-advantage.html",
       },
     ],
-    chemistry: [
+           chemistry: [
       {
         id: "nomenclature",
         title: "Nomenclature of Organic Compounds",
@@ -122,6 +122,54 @@ const SITE_DATA = {
         desc: "Build simple organic compound names yourself — methane to butanoic acid — and see how the prefix and suffix combine.",
         status: "live",
         page: "nomenclature.html",
+      },
+      {
+        id: "organic-reactions",
+        title: "Reactions of Organic Compounds",
+        tag: "Chapter 2",
+        desc: "Watch substitution, addition, combustion and cracking happen, build polymers and make fruity esters.",
+        status: "live",
+        page: "organic-reactions.html",
+      },
+      {
+        id: "periodic-table",
+        title: "Periodic Table and Electronic Configuration",
+        tag: "Chapter 3",
+        desc: "Fill electrons into subshells for elements 1 to 36, see why chromium and copper break the rule, and read block, period and group from the configuration.",
+        status: "live",
+        page: "periodic-table.html",
+      },
+      {
+        id: "gas-laws",
+        title: "Gas Laws and Mole Concept",
+        tag: "Chapter 4",
+        desc: "Squeeze a gas with Boyle's piston, heat a balloon with Charles's law and convert mass, moles, molecules and STP volume.",
+        status: "live",
+        page: "gas-laws.html",
+      },
+      {
+        id: "electrochemistry",
+        title: "Electrochemistry",
+        tag: "Chapter 5",
+        desc: "Build a galvanic cell from different metals, test displacement reactions and watch electrolysis and electroplating.",
+        status: "live",
+        page: "electrochemistry.html",
+      },
+      {
+        id: "metals",
+        title: "Metals",
+        tag: "Chapter 6",
+        desc: "Concentrate ores, see how reactivity decides extraction and go inside a blast furnace.",
+        status: "live",
+        page: "metals.html",
+      },
+      {
+        id: "industrial-compounds",
+        title: "Compounds of Industrial Importance",
+        tag: "Chapter 7",
+        desc: "Push the ammonia equilibrium, see sulphuric acid dehydrate and test salts with sodium hydroxide.",
+        status: "live",
+        page: "industrial-compounds.html",
       },
     ],
     maths: [

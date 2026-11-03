@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Metals — Class 10 Chemistry — Science Pro</title>
+<meta name="description" content="Concentrate an ore, see how reactivity decides extraction and ride down a blast furnace." />
+<link rel="icon" href="assets/logo-transparent.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts never block first paint: preload warms the cache, the stylesheet
+     itself is tagged media="print" so the browser doesn't wait on it to
+     render, then js/main.js flips it to media="all" the instant it's
+     ready. See PERFORMANCE.md. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" media="print" id="webfontsLink" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/lab.css" />
+<link rel="prefetch" href="subject.html?class=10&amp;subject=chemistry" />
+<style>
+  :root{ --c-chapter-accent: var(--c-chemistry); }
+  .lab-gap{ height:28px; }
+  .concept-grid{ margin-top:28px; }
+  canvas{ display:block; width:100%; }
+  .preset-btn:hover,.preset-btn.active{border-color:#689F38;color:#33691E;background:rgba(156,204,60,.14)}
+  .sl b{color:#33691E}.sl input{accent-color:#689F38}
+  .tools .go{background:#689F38;border-color:#689F38}.tools .go:hover{background:#33691E}
+  .result-box .line.found{color:#33691E;background:rgba(156,204,60,.2)}
+  .eq-box{background:rgba(156,204,60,.12);border-left-color:#689F38}.eq-title{color:#33691E}
+  .note-box{margin-top:14px;padding:12px 16px;border-radius:var(--radius-sm);background:rgba(156,204,60,.14);border-left:4px solid var(--c-chemistry);font-weight:600;font-size:.92rem;line-height:1.5}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+  .tab{font-family:var(--f-mono);font-size:.78rem;padding:10px 14px;min-height:44px;border-radius:var(--radius-pill);border:1.5px solid var(--c-cream-dim);background:#fff;color:var(--c-ink-soft);cursor:pointer}
+  .tab.on{border-color:#689F38;background:#689F38;color:#fff}
+  .stepper{display:flex;align-items:center;gap:6px}
+  .stepper button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--c-cream-dim);background:#fff;font-size:1.2rem;font-weight:700;cursor:pointer;color:#33691E}
+  .stepper output{min-width:34px;text-align:center;font-family:var(--f-mono);font-weight:600}
+  .answer-pill{display:inline-block;padding:8px 16px;border-radius:var(--radius-pill);background:var(--c-navy);color:#fff;font-family:var(--f-mono);font-weight:600;font-size:.9rem}
+.preset-btn{min-width:44px}</style>
+</head>
+<body>
+<header class="site-header is-dark">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="brand-logo" width="73" height="32" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="classes.html">Classes</a>
+    </nav>
+</div>
+</header>
+
+<section class="page-hero" style="padding-bottom:80px;">
+  <div class="container">
+    <div class="crumb" style="color:rgba(250,247,241,.6); margin-bottom:14px;">
+      <a href="classes.html">Classes</a><span class="sep">/</span>
+      <a href="class10.html">Class 10</a><span class="sep">/</span>
+      <a href="subject.html?class=10&subject=chemistry">Chemistry</a><span class="sep">/</span>
+      <span>Metals</span>
+    </div>
+    <span class="eyebrow">CHAPTER 6 · CHEMISTRY</span>
+    <h1>Metals</h1>
+    <p>Concentrate ores, see how reactivity decides extraction and go inside a blast furnace.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="lab-card reveal">
+    <h2 class="lab-title">1 · Concentrate the ore</h2>
+    <p class="lab-sub">An ore comes mixed with impurities (gangue). Pick an ore and watch the method that separates it.</p>
+    <div class="stage"><canvas id="orCanvas" aria-label="Animation of an ore being separated from its gangue."></canvas></div>
+    <div class="preset-row">
+      <button class="preset-btn on" type="button" data-o="0">Haematite</button>
+      <button class="preset-btn" type="button" data-o="1">Tinstone</button>
+      <button class="preset-btn" type="button" data-o="2">Zinc blende</button>
+      <button class="preset-btn" type="button" data-o="3">Bauxite</button>
+    </div>
+    <div class="result-box" id="orResult" aria-live="polite"></div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">2 · Reactivity decides the method</h2>
+    <p class="lab-sub">Slide down the reactivity series. See how each metal is extracted.</p>
+    <div class="stage"><canvas id="rvCanvas" aria-label="Reactivity series bars coloured by extraction method."></canvas></div>
+    <div class="slider-grid">
+      <div class="sl"><span>Metal: <b id="rvM">K</b></span><input type="range" id="rvS" min="0" max="12" step="1" value="0" aria-label="Metal in the reactivity series" /></div>
+    </div>
+    <div class="result-box" id="rvResult" aria-live="polite"></div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">3 · Inside the blast furnace</h2>
+    <p class="lab-sub">Haematite, coke and limestone go in at the top. Hot air goes in at the bottom. Slide down to see what happens at each level.</p>
+    <div class="stage"><canvas id="bfCanvas" aria-label="Cross section of a blast furnace with charge moving down and hot air moving up."></canvas></div>
+    <div class="slider-grid">
+      <div class="sl"><span>Depth in the furnace</span><input type="range" id="bfS" min="0" max="100" step="1" value="0" aria-label="Depth in the blast furnace" /></div>
+    </div>
+    <div class="result-box" id="bfResult" aria-live="polite"></div>
+  </div>
+  <div class="concept-grid">
+    <div class="concept-card reveal"><h4>Ore, mineral and gangue</h4><p>A mineral is a natural compound of a metal. An ore is a mineral from which the metal can be extracted profitably. Gangue is the earthy impurity mixed with the ore.</p><span class="formula">ore + gangue</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Concentration</h4><p>Hydraulic washing (ore denser than gangue), magnetic separation (one is magnetic), froth flotation (sulphide ores) and leaching (ore dissolves in a solvent, e.g. bauxite).</p><span class="formula">4 methods</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Calcination and roasting</h4><p>Calcination: heating in limited air or no air. Carbonates and hydroxides give oxides. Roasting: heating below the melting point in excess air. Sulphides give oxides and SO₂.</p><span class="formula">2ZnS + 3O₂ → 2ZnO + 2SO₂</span></div>
+    <div class="concept-card reveal"><h4>Reduction</h4><p>Moderately reactive metals (Zn, Fe, Sn, Pb) are reduced from their oxides with coke or carbon monoxide. Highly reactive metals (K, Na, Ca, Mg, Al) need electrolysis. Mercury is obtained by controlled heating.</p><span class="formula">ZnO + C → Zn + CO</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Refining</h4><p>Liquation purifies low melting metals (Sn, Pb). Distillation purifies low boiling metals (Zn, Hg). In electrolytic refining the impure metal is the anode and pure metal the cathode (Cu, Zn).</p><span class="formula">anode: impure · cathode: pure</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Flux and slag</h4><p>A flux combines with the gangue to form molten slag. In the blast furnace limestone gives CaO, which joins silica to make calcium silicate slag.</p><span class="formula">CaO + SiO₂ → CaSiO₃</span></div>
+    <div class="concept-card reveal"><h4>Iron and steel</h4><p>The ore of iron is haematite (Fe₂O₃). Iron pyrite (FeS₂) is called fool's gold. Coke and carbon monoxide reduce the ore in the blast furnace. Steel is iron with a little carbon.</p><span class="formula">Fe₂O₃ + 3CO → 2Fe + 3CO₂</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Alloy steels</h4><p>Stainless steel (Fe, Cr, Ni, C) resists rust. Nichrome makes heating coils. Alnico makes permanent magnets. Alloys with the same components can have different properties because the amounts differ.</p><span class="formula">stainless · nichrome · alnico</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Corrosion</h4><p>Iron rusts with oxygen and moisture. A more reactive metal like magnesium or zinc in contact protects iron. Aluminium resists corrosion because of a thin oxide layer.</p><span class="formula">Mg protects Fe</span></div>
+  </div>
+</div>
+
+<section class="section-tight" id="resourcesSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">RESOURCES</span>
+      <h2>Practice with past questions</h2>
+      <p>Previous year questions for this chapter — download and practice offline.</p>
+    </div>
+    <div class="resource-grid" id="resourceGrid" data-chapter="metals"></div>
+  </div>
+</section>
+
+<section class="section-tight" id="quizSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">PRACTICE</span>
+      <h2>Check your understanding</h2>
+      <p>Ten quick questions.</p>
+    </div>
+    <div class="game-shell reveal" id="quizShell" style="margin:0;"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="footer-logo" width="77" height="34" />
+        </div>
+        <div class="footer-slogan">learn science in a fun and easy way — don't memorise it.</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Science Pro. All rights reserved.</span>
+      <span>Built for curious students, classes 5–12.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/social.js" defer></script>
+<script src="js/chapter-resources.js" defer></script>
+<script src="js/metals.js" defer></script>
+</body>
+</html>

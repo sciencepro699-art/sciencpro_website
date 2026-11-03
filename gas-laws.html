@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Gas Laws and Mole Concept — Class 10 Chemistry — Science Pro</title>
+<meta name="description" content="Squeeze a gas, heat a balloon and convert mass to moles, molecules and volume." />
+<link rel="icon" href="assets/logo-transparent.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts never block first paint: preload warms the cache, the stylesheet
+     itself is tagged media="print" so the browser doesn't wait on it to
+     render, then js/main.js flips it to media="all" the instant it's
+     ready. See PERFORMANCE.md. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" media="print" id="webfontsLink" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/lab.css" />
+<link rel="prefetch" href="subject.html?class=10&amp;subject=chemistry" />
+<style>
+  :root{ --c-chapter-accent: var(--c-chemistry); }
+  .lab-gap{ height:28px; }
+  .concept-grid{ margin-top:28px; }
+  canvas{ display:block; width:100%; }
+  .preset-btn:hover,.preset-btn.active{border-color:#689F38;color:#33691E;background:rgba(156,204,60,.14)}
+  .sl b{color:#33691E}.sl input{accent-color:#689F38}
+  .tools .go{background:#689F38;border-color:#689F38}.tools .go:hover{background:#33691E}
+  .result-box .line.found{color:#33691E;background:rgba(156,204,60,.2)}
+  .eq-box{background:rgba(156,204,60,.12);border-left-color:#689F38}.eq-title{color:#33691E}
+  .note-box{margin-top:14px;padding:12px 16px;border-radius:var(--radius-sm);background:rgba(156,204,60,.14);border-left:4px solid var(--c-chemistry);font-weight:600;font-size:.92rem;line-height:1.5}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+  .tab{font-family:var(--f-mono);font-size:.78rem;padding:10px 14px;min-height:44px;border-radius:var(--radius-pill);border:1.5px solid var(--c-cream-dim);background:#fff;color:var(--c-ink-soft);cursor:pointer}
+  .tab.on{border-color:#689F38;background:#689F38;color:#fff}
+  .stepper{display:flex;align-items:center;gap:6px}
+  .stepper button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--c-cream-dim);background:#fff;font-size:1.2rem;font-weight:700;cursor:pointer;color:#33691E}
+  .stepper output{min-width:34px;text-align:center;font-family:var(--f-mono);font-weight:600}
+  .answer-pill{display:inline-block;padding:8px 16px;border-radius:var(--radius-pill);background:var(--c-navy);color:#fff;font-family:var(--f-mono);font-weight:600;font-size:.9rem}
+.preset-btn{min-width:44px}</style>
+</head>
+<body>
+<header class="site-header is-dark">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="brand-logo" width="73" height="32" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="classes.html">Classes</a>
+    </nav>
+</div>
+</header>
+
+<section class="page-hero" style="padding-bottom:80px;">
+  <div class="container">
+    <div class="crumb" style="color:rgba(250,247,241,.6); margin-bottom:14px;">
+      <a href="classes.html">Classes</a><span class="sep">/</span>
+      <a href="class10.html">Class 10</a><span class="sep">/</span>
+      <a href="subject.html?class=10&subject=chemistry">Chemistry</a><span class="sep">/</span>
+      <span>Gas Laws and Mole Concept</span>
+    </div>
+    <span class="eyebrow">CHAPTER 4 · CHEMISTRY</span>
+    <h1>Gas Laws and Mole Concept</h1>
+    <p>Squeeze a gas with a piston, heat a balloon and count moles, molecules and litres.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="lab-card reveal">
+    <h2 class="lab-title">1 · Boyle's law: pressure and volume</h2>
+    <p class="lab-sub">Push the piston down by raising the pressure. The temperature stays the same.</p>
+    <div class="stage"><canvas id="byCanvas" aria-label="A piston compressing a gas as pressure increases."></canvas></div>
+    <div class="slider-grid">
+      <div class="sl"><span>Pressure: <b id="byP">1 atm</b></span><input type="range" id="byPs" min="1" max="8" step="1" value="1" aria-label="Pressure in atmosphere" /></div>
+    </div>
+    <div class="result-box" id="byResult" aria-live="polite"></div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">2 · Charles's law: temperature and volume</h2>
+    <p class="lab-sub">Heat the gas and the balloon grows. The pressure stays the same. Always use the Kelvin scale.</p>
+    <div class="stage"><canvas id="chCanvas" aria-label="A balloon that grows as the temperature rises."></canvas></div>
+    <div class="slider-grid">
+      <div class="sl"><span>Temperature: <b id="chT">300 K</b></span><input type="range" id="chTs" min="150" max="450" step="10" value="300" aria-label="Temperature in kelvin" /></div>
+    </div>
+    <div class="result-box" id="chResult" aria-live="polite"></div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">3 · Mole calculator</h2>
+    <p class="lab-sub">Pick a substance and a mass. See the moles, the number of molecules and the volume of the gas at STP.</p>
+    <div class="stage"><canvas id="mlCanvas" aria-label="Mass converted to moles, molecules and volume."></canvas></div>
+    <div class="preset-row">
+      <button class="preset-btn" type="button" id="mlPrev" aria-label="Previous substance">◀</button>
+      <button class="preset-btn" type="button" id="mlName" disabled>CO₂</button>
+      <button class="preset-btn" type="button" id="mlNext" aria-label="Next substance">▶</button>
+    </div>
+    <div class="slider-grid">
+      <div class="sl"><span>Mass: <b id="mlM">88 g</b></span><input type="range" id="mlMs" min="0" max="440" step="2" value="88" aria-label="Mass in grams" /></div>
+    </div>
+    <div class="result-box" id="mlResult" aria-live="polite"></div>
+  </div>
+  <div class="concept-grid">
+    <div class="concept-card reveal"><h4>Properties of a gas</h4><p>Three measurable properties: volume (the volume of the container), pressure (force on the walls from collisions) and temperature (in kelvin, K = °C + 273).</p><span class="formula">K = °C + 273</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Boyle's law</h4><p>At constant temperature, the volume of a fixed mass of gas is inversely proportional to its pressure. Double the pressure and the volume halves.</p><span class="formula">P₁V₁ = P₂V₂</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Charles's law</h4><p>At constant pressure, the volume of a fixed mass of gas is directly proportional to its temperature in kelvin.</p><span class="formula">V₁ ÷ T₁ = V₂ ÷ T₂</span></div>
+    <div class="concept-card reveal"><h4>Avogadro's law</h4><p>At the same temperature and pressure, equal volumes of all gases contain the same number of molecules. So the volume is proportional to the number of moles.</p><span class="formula">V ∝ n</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>The mole</h4><p>One mole of any substance has 6.022 × 10²³ particles. Its mass in grams is its molar mass (the atomic or molecular mass).</p><span class="formula">1 mole = 6.022 × 10²³ particles</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Moles, mass and molecules</h4><p>To find the number of moles divide the mass by the molar mass. Multiply the moles by 6.022 × 10²³ for the number of molecules.</p><span class="formula">n = mass ÷ molar mass</span></div>
+    <div class="concept-card reveal"><h4>Molar volume</h4><p>At STP (273 K and 1 atm), one mole of any gas occupies 22.4 L.</p><span class="formula">1 mol gas at STP = 22.4 L</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Ideal gas equation</h4><p>Boyle's, Charles's and Avogadro's laws combine into one equation. R is the universal gas constant.</p><span class="formula">PV = nRT</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Moles in equations</h4><p>The coefficients in a balanced equation are moles. In N₂ + 3H₂ → 2NH₃, 1 mol of nitrogen reacts with 3 mol of hydrogen to give 2 mol of ammonia.</p><span class="formula">N₂ + 3H₂ → 2NH₃</span></div>
+  </div>
+</div>
+
+<section class="section-tight" id="resourcesSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">RESOURCES</span>
+      <h2>Practice with past questions</h2>
+      <p>Previous year questions for this chapter — download and practice offline.</p>
+    </div>
+    <div class="resource-grid" id="resourceGrid" data-chapter="gas-laws"></div>
+  </div>
+</section>
+
+<section class="section-tight" id="quizSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">PRACTICE</span>
+      <h2>Check your understanding</h2>
+      <p>Ten quick questions.</p>
+    </div>
+    <div class="game-shell reveal" id="quizShell" style="margin:0;"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="footer-logo" width="77" height="34" />
+        </div>
+        <div class="footer-slogan">learn science in a fun and easy way — don't memorise it.</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Science Pro. All rights reserved.</span>
+      <span>Built for curious students, classes 5–12.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/social.js" defer></script>
+<script src="js/chapter-resources.js" defer></script>
+<script src="js/gas-laws.js" defer></script>
+</body>
+</html>

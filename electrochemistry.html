@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<title>Electrochemistry — Class 10 Chemistry — Science Pro</title>
+<meta name="description" content="Build a galvanic cell, test displacement reactions and watch electrolysis and electroplating." />
+<link rel="icon" href="assets/logo-transparent.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts never block first paint: preload warms the cache, the stylesheet
+     itself is tagged media="print" so the browser doesn't wait on it to
+     render, then js/main.js flips it to media="all" the instant it's
+     ready. See PERFORMANCE.md. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" media="print" id="webfontsLink" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/lab.css" />
+<link rel="prefetch" href="subject.html?class=10&amp;subject=chemistry" />
+<style>
+  :root{ --c-chapter-accent: var(--c-chemistry); }
+  .lab-gap{ height:28px; }
+  .concept-grid{ margin-top:28px; }
+  canvas{ display:block; width:100%; }
+  .preset-btn:hover,.preset-btn.active{border-color:#689F38;color:#33691E;background:rgba(156,204,60,.14)}
+  .sl b{color:#33691E}.sl input{accent-color:#689F38}
+  .tools .go{background:#689F38;border-color:#689F38}.tools .go:hover{background:#33691E}
+  .result-box .line.found{color:#33691E;background:rgba(156,204,60,.2)}
+  .eq-box{background:rgba(156,204,60,.12);border-left-color:#689F38}.eq-title{color:#33691E}
+  .note-box{margin-top:14px;padding:12px 16px;border-radius:var(--radius-sm);background:rgba(156,204,60,.14);border-left:4px solid var(--c-chemistry);font-weight:600;font-size:.92rem;line-height:1.5}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+  .tab{font-family:var(--f-mono);font-size:.78rem;padding:10px 14px;min-height:44px;border-radius:var(--radius-pill);border:1.5px solid var(--c-cream-dim);background:#fff;color:var(--c-ink-soft);cursor:pointer}
+  .tab.on{border-color:#689F38;background:#689F38;color:#fff}
+  .stepper{display:flex;align-items:center;gap:6px}
+  .stepper button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--c-cream-dim);background:#fff;font-size:1.2rem;font-weight:700;cursor:pointer;color:#33691E}
+  .stepper output{min-width:34px;text-align:center;font-family:var(--f-mono);font-weight:600}
+  .answer-pill{display:inline-block;padding:8px 16px;border-radius:var(--radius-pill);background:var(--c-navy);color:#fff;font-family:var(--f-mono);font-weight:600;font-size:.9rem}
+.preset-btn{min-width:44px}</style>
+</head>
+<body>
+<header class="site-header is-dark">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="brand-logo" width="73" height="32" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="classes.html">Classes</a>
+    </nav>
+</div>
+</header>
+
+<section class="page-hero" style="padding-bottom:80px;">
+  <div class="container">
+    <div class="crumb" style="color:rgba(250,247,241,.6); margin-bottom:14px;">
+      <a href="classes.html">Classes</a><span class="sep">/</span>
+      <a href="class10.html">Class 10</a><span class="sep">/</span>
+      <a href="subject.html?class=10&subject=chemistry">Chemistry</a><span class="sep">/</span>
+      <span>Electrochemistry</span>
+    </div>
+    <span class="eyebrow">CHAPTER 5 · CHEMISTRY</span>
+    <h1>Electrochemistry</h1>
+    <p>Build cells from different metals, see which metal displaces which, and watch electrolysis and electroplating.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="lab-card reveal">
+    <h2 class="lab-title">1 · Build a galvanic cell</h2>
+    <p class="lab-sub">Pick two metals. The more reactive metal gives up electrons. Watch the electrons flow through the wire and see the voltage.</p>
+    <div class="stage"><canvas id="gcCanvas" aria-label="A galvanic cell with two beakers, a salt bridge and a voltmeter."></canvas></div>
+    <div class="preset-row">
+      <button class="preset-btn" type="button" id="gcA">Left: Zn</button>
+      <button class="preset-btn" type="button" id="gcB">Right: Cu</button>
+    </div>
+    <div class="result-box" id="gcResult" aria-live="polite"></div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">2 · Displacement reactions</h2>
+    <p class="lab-sub">Dip a metal strip in a salt solution. Will the strip displace the metal from the solution?</p>
+    <div class="stage"><canvas id="dpCanvas" aria-label="A metal strip dipped in a salt solution."></canvas></div>
+    <div class="preset-row">
+      <button class="preset-btn" type="button" id="dpA">Strip: Zn</button>
+      <button class="preset-btn" type="button" id="dpB">Solution: Cu²⁺</button>
+    </div>
+    <div class="result-box" id="dpResult" aria-live="polite"></div>
+  </div>
+  <div class="lab-gap"></div>
+  <div class="lab-card reveal">
+    <h2 class="lab-title">3 · Electrolysis</h2>
+    <p class="lab-sub">A battery pushes electricity through a liquid and splits it. Choose an experiment.</p>
+    <div class="stage"><canvas id="elCanvas" aria-label="An electrolytic cell with a battery, an anode and a cathode."></canvas></div>
+    <div class="preset-row">
+      <button class="preset-btn on" type="button" data-e="0">Molten NaCl</button>
+      <button class="preset-btn" type="button" data-e="1">NaCl solution</button>
+      <button class="preset-btn" type="button" data-e="2">Electroplating</button>
+    </div>
+    <div class="result-box" id="elResult" aria-live="polite"></div>
+  </div>
+  <div class="concept-grid">
+    <div class="concept-card reveal"><h4>Galvanic cell</h4><p>A galvanic cell changes chemical energy into electrical energy. The Daniell cell has a zinc rod in zinc sulphate and a copper rod in copper sulphate, joined by a salt bridge.</p><span class="formula">chemical → electrical</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Anode and cathode</h4><p>Oxidation happens at the anode and reduction at the cathode. In a galvanic cell the anode is negative. In an electrolytic cell the anode is positive.</p><span class="formula">Galvanic: anode − · cathode +</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Salt bridge</h4><p>A tube of an inert electrolyte (KCl, NH₄Cl or KNO₃) joins the two half cells. It completes the circuit and keeps each solution electrically neutral without letting them mix.</p><span class="formula">completes the circuit</span></div>
+    <div class="concept-card reveal"><h4>Reactivity series</h4><p>K, Ca, Mg, Al, Zn, Fe, Ni, Sn, H, Cu, Hg, Ag. A metal higher in the series is more reactive and is oxidised more easily. It displaces a lower metal from its salt solution.</p><span class="formula">Zn + CuSO₄ → ZnSO₄ + Cu</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Oxidising and reducing agents</h4><p>The oxidising agent causes oxidation and is itself reduced. The reducing agent causes reduction and is itself oxidised. The more reactive metal is the reducing agent.</p><span class="formula">Mg + Cu²⁺ → Mg²⁺ + Cu</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Metals and acids</h4><p>Metals above hydrogen in the series displace hydrogen from dilute acids. Copper, silver and gold, which are below hydrogen, do not.</p><span class="formula">Zn + 2HCl → ZnCl₂ + H₂</span></div>
+    <div class="concept-card reveal"><h4>Electrolysis</h4><p>Electrolysis uses electricity to bring about a chemical change. Molten NaCl gives sodium at the cathode and chlorine at the anode. NaCl solution gives hydrogen at the cathode, chlorine at the anode and NaOH.</p><span class="formula">molten NaCl → Na + Cl₂</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.08s;"><h4>Electroplating</h4><p>Coating one metal on another by electrolysis. The object to be plated is the cathode (negative). The plating metal is the anode (positive). The solution is a salt of the plating metal.</p><span class="formula">object = cathode (−)</span></div>
+    <div class="concept-card reveal" style="transition-delay:0.16s;"><h4>Types of cells</h4><p>Primary cells (dry cell, button cell) cannot be recharged. Secondary cells (lead acid, lithium ion) can be recharged. Fuel cells give electricity as long as fuel is supplied.</p><span class="formula">primary · secondary · fuel</span></div>
+  </div>
+</div>
+
+<section class="section-tight" id="resourcesSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">RESOURCES</span>
+      <h2>Practice with past questions</h2>
+      <p>Previous year questions for this chapter — download and practice offline.</p>
+    </div>
+    <div class="resource-grid" id="resourceGrid" data-chapter="electrochemistry"></div>
+  </div>
+</section>
+
+<section class="section-tight" id="quizSection">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">PRACTICE</span>
+      <h2>Check your understanding</h2>
+      <p>Ten quick questions.</p>
+    </div>
+    <div class="game-shell reveal" id="quizShell" style="margin:0;"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo-wordmark.png" alt="Science Pro logo" class="footer-logo" width="77" height="34" />
+        </div>
+        <div class="footer-slogan">learn science in a fun and easy way — don't memorise it.</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Science Pro. All rights reserved.</span>
+      <span>Built for curious students, classes 5–12.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/social.js" defer></script>
+<script src="js/chapter-resources.js" defer></script>
+<script src="js/electrochemistry.js" defer></script>
+</body>
+</html>
