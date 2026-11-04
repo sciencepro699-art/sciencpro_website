@@ -10,6 +10,7 @@ var CONFIG={
 var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
 function $(s,r){return(r||document).querySelector(s)}function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
 function toast(t){var o=$(".toast");if(o)o.remove();var e=document.createElement("div");e.className="toast";e.setAttribute("role","status");e.textContent=t;document.body.appendChild(e);setTimeout(function(){e.remove()},3200)}
+document.documentElement.classList.add("js-on");$$("[data-w]").forEach(function(b){b.style.width="0"});
 /* join links */
 $$("[data-join]").forEach(function(a){if(CONFIG.JOIN_URL){a.href=CONFIG.JOIN_URL;a.target="_blank";a.rel="noopener";a.textContent="👑 Join Pro Club · ₹99 ›"}else if(CONFIG.WHATSAPP){a.href="https://wa.me/"+String(CONFIG.WHATSAPP).replace(/\D/g,"")+"?text="+encodeURIComponent("Hello Science Pro, I want to join the Pro Club that starts on 1 December.");a.target="_blank";a.rel="noopener"}});
 /* scroll progress + sticky cta */
