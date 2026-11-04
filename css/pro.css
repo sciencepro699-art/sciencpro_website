@@ -2,7 +2,8 @@
 :root{--or:#FF7A29;--or2:#FFB03A;--ord:#E85A1B;--navy:#0A0E1F;--navy2:#10162E;--navy3:#1A2140;--cream:#FAF7F1;--mu:#A9B1CE;--red:#FF5C7A;--grn:#34D399;--gold:#FFC83D;--r:20px}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{font-family:Inter,system-ui,sans-serif;background:var(--navy);color:var(--cream);line-height:1.6;overflow-x:hidden}
+html{overflow-x:clip}
+body{font-family:Inter,system-ui,sans-serif;background:var(--navy);color:var(--cream);line-height:1.6;overflow-x:clip}
 h1,h2,h3{font-family:"Space Grotesk",Inter,sans-serif;line-height:1.15}
 a{color:inherit}
 img{max-width:100%}
@@ -61,7 +62,7 @@ header.plain .back:hover{background:rgba(255,176,58,.16);border-color:var(--or2)
 .price b{color:var(--cream);font-size:1.15rem}
 .fade{opacity:0;transform:translateY(16px);animation:wordIn .8s .9s ease forwards}
 /* stats */
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:46px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(140px,100%),1fr));gap:14px;margin-top:46px}
 .stat{padding:18px;border-radius:var(--r);background:rgba(16,22,46,.7);border:1px solid rgba(250,247,241,.08)}
 .stat b{display:block;font:700 2.1rem "Space Grotesk";color:var(--or2)}
 .stat span{color:var(--mu);font-size:.88rem}
@@ -72,8 +73,8 @@ section{padding:70px 0}
 h2{font-size:clamp(1.7rem,5vw,2.6rem);margin-bottom:12px;font-weight:700}
 .sub{color:var(--mu);max-width:60ch;margin-bottom:30px}
 .grid{display:grid;gap:16px}
-.g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-.split{display:grid;gap:36px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:center}
+.g4{grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+.split{display:grid;gap:36px;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));align-items:center}
 .card{position:relative;background:var(--navy2);border:1px solid rgba(250,247,241,.08);border-radius:var(--r);padding:24px;transition:transform .3s,border-color .3s,box-shadow .3s;transform-style:preserve-3d}
 .card:hover{border-color:rgba(255,176,58,.45);box-shadow:0 24px 50px -24px rgba(255,122,41,.45)}
 .card .n{display:grid;place-items:center;width:44px;height:44px;border-radius:13px;background:rgba(255,122,41,.15);color:var(--or2);font:700 1.15rem "Space Grotesk";margin-bottom:14px;transition:transform .4s}
@@ -153,7 +154,7 @@ footer a{color:var(--or2)}
 @media(max-width:720px){.sticky{display:block}}
 /* contact */
 .chead{padding:120px 0 24px;text-align:center}
-.g2c{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g2c{grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr))}
 .big{display:flex;align-items:center;gap:16px;text-decoration:none;padding:26px}
 .big .ic{font-size:1.9rem;width:60px;height:60px;border-radius:18px;display:grid;place-items:center;flex:none;transition:transform .4s}
 .big:hover .ic{transform:scale(1.12) rotate(-8deg)}
@@ -165,4 +166,7 @@ footer a{color:var(--or2)}
 .big.call .ic{animation:ring 2.8s ease-in-out infinite}
 @keyframes ring{0%,70%,100%{transform:rotate(0)}74%{transform:rotate(-14deg)}78%{transform:rotate(12deg)}82%{transform:rotate(-10deg)}86%{transform:rotate(8deg)}90%{transform:rotate(0)}}
 .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--navy3);border:1px solid rgba(255,176,58,.4);padding:12px 18px;border-radius:14px;z-index:80;max-width:90vw;font-size:.92rem;animation:wordIn .3s ease}
+@media(max-width:720px){.js-on .rv.left,.js-on .rv.right{transform:translateY(26px)}.js-on .rv.left.in,.js-on .rv.right.in{transform:none}}
+@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr);gap:10px}.stat{padding:14px 10px}.stat b{font-size:1.7rem}.kick{font-size:.72rem;letter-spacing:.06em;padding:6px 12px}section{padding:52px 0}.card{padding:20px}.plan{padding:28px 18px}.plan .amt{font-size:3rem}}
+@media(max-width:380px){.btn.mega{padding:0 16px;font-size:1rem;min-height:56px}.hero h1{font-size:2.1rem}.row{gap:8px;padding:0 8px}.mv{width:38px}.sc{font-size:.92rem}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.rv,.hero h1 .w,.fade{opacity:1;transform:none}html{scroll-behavior:auto}}
