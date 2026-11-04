@@ -886,3 +886,6 @@ p{ margin:0; }
   .sp-social-btn img, .sp-fab-plus{ transition:none; }
   .sp-fab::before{ animation:none; }
 }
+
+.nav-links .nav-pro{background:linear-gradient(135deg,#FFB03A,#FF7A29);color:#1a0d02!important;padding:8px 16px;border-radius:999px;font-weight:700}
+.nav-links .nav-pro:hover{filter:brightness(1.08)}
